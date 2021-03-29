@@ -15,7 +15,7 @@
 
 
 <?import java.net.URL?>
-<GridPane fx:controller="root.controller.Controller" xmlns:fx="http://javafx.com/fxml" styleClass="background" alignment="center" GridPane.columnSpan="3" hgap="10" vgap="10">
+<GridPane fx:id="gp_1" fx:controller="root.controller.MainController" xmlns:fx="http://javafx.com/fxml" styleClass="background" alignment="center" GridPane.columnSpan="3" hgap="10" vgap="10">
 
 
     <Label styleClass="select_label" text="Project 2.3"  GridPane.rowIndex="0"/>
@@ -23,7 +23,7 @@
     <ComboBox fx:id="combobox_select" styleClass="select_combobox" value="Select Game" GridPane.columnIndex="0" GridPane.rowIndex="1" >
         <items>
             <FXCollections fx:factory="observableArrayList">
-                <String fx:id="game_1" fx:value="Tic-Tac-To"/>
+                <String fx:id="game_1" fx:value="Tic-Tac-Toe"/>
                 <String fx:id="game_2" fx:value="Reversi"/>
             </FXCollections>
         </items>

@@ -1,20 +1,26 @@
-.background{
+.background {
     /*-fx-background-color: #01b106;*/
     -fx-background-image: url("bg.png");
     -fx-background-repeat: stretch;
-    -fx-background-size: 800 800;
+    -fx-background-size: 1280 720;
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }
 
-.select_label{
-
-    -fx-font-size: 35px;
+.selectLabel {
+    -fx-font-size: 25px;
     -fx-text-alignment: center;
     -fx-font-weight: bold;
-
-
 }
 
-.select_combobox{
+.selectButton {
+    -fx-pref-height: 50px;
+    -fx-font-size: 1em;
+    -fx-background-color: #35c7de;
+}
+
+.selectGame {
+    -fx-pref-height: 50px;
     -fx-pref-width: 200px;
+    -fx-font-size: 1.5em;
+    -fx-background-color: #35c7de;
 }

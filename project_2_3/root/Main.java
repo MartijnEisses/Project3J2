@@ -1,36 +1,51 @@
 package root;
-import javafx.application.Application;
 
+import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
-import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
-import root.controller.MainController;
+import java.io.IOException;
 
 
 public class Main extends Application {
 
+    public static Stage primaryStage;
+
+    @FXML
+    public static Parent root;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("view/Main.fxml"));
-        primaryStage.setTitle("Project 2.3");
-        Scene scene = new Scene(root, 800, 800);
-        primaryStage.setScene(scene);
+
+        this.primaryStage = primaryStage;
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("view/main.fxml"));
+        root = loader.load();
+
+        primaryStage.setTitle("project 2.3");
+        primaryStage.setResizable(false);
+        primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
-
-
-        ComboBox cb = (ComboBox) primaryStage.getScene().lookup("#combobox_select");
-        cb.getSelectionModel().select(0);
-
-        MainController cm = new MainController();
 
     }
 
-
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static void setScene(String path){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource(path));
+        try {
+            root = loader.load();
+            primaryStage.setScene(new Scene(root, 1280, 720));
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

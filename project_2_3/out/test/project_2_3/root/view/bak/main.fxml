@@ -15,7 +15,7 @@
 
 
 <?import java.net.URL?>
-<GridPane fx:controller="root.controller.MainController" xmlns:fx="http://javafx.com/fxml" styleClass="background" alignment="center" GridPane.columnSpan="3" hgap="10" vgap="10">
+<GridPane fx:id="gp_1" fx:controller="root.controller.MainController" xmlns:fx="http://javafx.com/fxml" styleClass="background" alignment="center" GridPane.columnSpan="3" hgap="10" vgap="10">
 
 
     <Label styleClass="select_label" text="Project 2.3"  GridPane.rowIndex="0"/>
