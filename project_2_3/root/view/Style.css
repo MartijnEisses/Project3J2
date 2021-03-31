@@ -6,6 +6,10 @@
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }
 
+.boardBackground {
+    -fx-background-color: #24cd28;
+}
+
 .selectLabel {
     -fx-font-size: 25px;
     -fx-text-alignment: center;
