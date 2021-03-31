@@ -14,6 +14,8 @@ public class MainController extends Controller {
     @FXML
     ComboBox<String> selectGame;
 
+    public static Games selectedGame;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         selectGame.getItems().addAll("TicTacToe", "Reversi");
@@ -24,6 +26,7 @@ public class MainController extends Controller {
     protected void handleSubmitButtonAction(ActionEvent event) {
         selectedGame = getSelectedGame();
         setScene("view/board.fxml");
+//        initialize(); createGridBoard(new Board(3,3));
 
     }
 

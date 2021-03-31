@@ -21,12 +21,22 @@ public class BoardController extends Controller {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        System.out.println(selectedGame);
-        createGridBoard(new Board(3,3));
+        initializeGridBoard();
     }
 
-    public void createGridBoard(Board b){
+    public void initializeGridBoard(){
+        switch((Games)MainController.selectedGame) {
+            case TicTacToe:
+                createGridBoard(new Board(3,3), 175, 175);
+                break;
+
+            case Reversi:
+                createGridBoard(new Board(8,8), 75, 75);
+                break;
+        }
+    }
+
+    public void createGridBoard(Board b, int i1, int i2){
         int[] x = b.getBoard()[0];
         int[] y = b.getBoard()[1];
 
@@ -35,7 +45,7 @@ public class BoardController extends Controller {
         for (int i = 0; i < x.length; i++){
             for (int j = 0; j < y.length; j++){
                 p = new Pane();
-                p.setMinSize(150, 150);
+                p.setMinSize(i1, i2);
                 gridBoard.add(p, i, j);
             }
         }

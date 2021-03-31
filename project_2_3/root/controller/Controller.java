@@ -12,8 +12,6 @@ public abstract class Controller implements Initializable {
         Reversi
     }
 
-    public Games selectedGame;
-
     protected void setScene(String path) {
         Main.setScene(path);
     }
