@@ -6,8 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.io.IOException;
+import root.model.TicTacToe;
 
+import java.io.IOException;
 
 public class Main extends Application {
 
@@ -17,7 +18,7 @@ public class Main extends Application {
     public static Parent root;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
 
         this.primaryStage = primaryStage;
 
@@ -33,10 +34,12 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args);
+        // launch(args);
+        TicTacToe ttt = new TicTacToe();
+        ttt.Start();
     }
 
-    public static void setScene(String path){
+    public static void setScene(String path) {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource(path));
         try {
