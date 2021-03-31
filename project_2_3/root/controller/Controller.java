@@ -1,15 +1,18 @@
 package root.controller;
 
-import javafx.fxml.FXMLLoader;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.ComboBox;
 import root.Main;
 
-import java.io.IOException;
-
 public abstract class Controller implements Initializable {
+
+    public enum Games{
+        TicTacToe,
+        Reversi
+    }
+
+    public Games selectedGame;
 
     protected void setScene(String path) {
         Main.setScene(path);

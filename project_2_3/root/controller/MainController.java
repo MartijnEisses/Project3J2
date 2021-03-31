@@ -2,28 +2,17 @@ package root.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
-import root.Main;
+import root.model.TicTacToe;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainController extends Controller {
 
-    public enum Games{
-        TicTacToe,
-        Reversi
-    }
-
     @FXML
     ComboBox<String> selectGame;
-
-    @FXML
-    private GridPane content;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -33,7 +22,9 @@ public class MainController extends Controller {
 
     @FXML
     protected void handleSubmitButtonAction(ActionEvent event) {
+        selectedGame = getSelectedGame();
         setScene("view/board.fxml");
+
     }
 
     public Games getSelectedGame(){
