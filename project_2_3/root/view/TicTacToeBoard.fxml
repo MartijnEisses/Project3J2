@@ -1,0 +1,27 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<?import java.net.URL?>
+<GridPane fx:id="gridBoard" fx:controller="root.controller.TicTacToeBoardController" xmlns:fx="http://javafx.com/fxml" styleClass="boardBackground" alignment="center" gridLinesVisible="true">
+
+
+
+
+    <stylesheets>
+        <URL value="@Style.css" />
+    </stylesheets>
+
+</GridPane>
