@@ -3,7 +3,7 @@ package root.model;
 import java.io.BufferedReader;
 import java.util.Scanner;
 
-public class TicTacToe {
+public class TicTacToe extends Board {
 
     Scanner in = new Scanner(System.in);
 
@@ -20,6 +20,7 @@ public class TicTacToe {
     int turn = 0;
 
     public TicTacToe() {
+        super(3, 3);
         b = new Board(3, 3);
 
     }
