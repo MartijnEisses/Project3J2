@@ -2,32 +2,49 @@ package root.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
+import root.Main;
+import root.model.Board;
+import root.model.Reversi;
 import root.model.TicTacToe;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainController extends Controller {
+public class MainController implements Initializable {
+
+    public enum Games{
+        TicTacToe,
+        Reversi
+    }
 
     @FXML
     ComboBox<String> selectGame;
 
     public static Games selectedGame;
 
-    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         selectGame.getItems().addAll("TicTacToe", "Reversi");
         selectGame.getSelectionModel().select(String.valueOf(Games.TicTacToe));
     }
 
+    protected void setScene(String path) {
+        Main.setScene(path);
+    }
+
     @FXML
     protected void handleSubmitButtonAction(ActionEvent event) {
         selectedGame = getSelectedGame();
-        setScene("view/board.fxml");
-//        initialize(); createGridBoard(new Board(3,3));
-
+        switch(getSelectedGame()) {
+            case TicTacToe:
+                setScene("view/TicTacToeBoard.fxml");
+                break;
+            case Reversi:
+                setScene("view/ReversiBoard.fxml");
+                break;
+        }
     }
 
     public Games getSelectedGame(){
