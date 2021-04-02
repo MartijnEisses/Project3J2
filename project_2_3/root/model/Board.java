@@ -1,5 +1,7 @@
 package root.model;
 
+import javafx.scene.layout.Pane;
+
 public class Board {
     private int[][] board;
 
@@ -31,4 +33,6 @@ public class Board {
             System.out.print("\n");
         }
     }
+
+
 }
