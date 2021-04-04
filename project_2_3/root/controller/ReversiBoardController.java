@@ -1,6 +1,5 @@
 package root.controller;
 
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.GridPane;
@@ -56,7 +55,7 @@ public class ReversiBoardController extends Reversi implements Initializable {
                     stone_1.setCenterX(100.0f);
                     stone_1.setCenterY(100.0f);
                     stone_1.setRadius(30.0f);
-
+                    System.out.println("Setting stone on : " + x + " - " +  y + " for: black");
                     gridBoard.add(stone_1, x, y);
                     this.turn = 2;
                     break;
@@ -66,7 +65,7 @@ public class ReversiBoardController extends Reversi implements Initializable {
                     stone_2.setCenterY(100.0f);
                     stone_2.setRadius(30.0f);
                     stone_2.setFill(Color.WHITE);
-
+                    System.out.println("Setting stone on : " + x + " - " +  y + " for: white" );
                     gridBoard.add(stone_2, x, y);
                     this.turn = 1;
                     break;
