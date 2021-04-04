@@ -1,5 +1,6 @@
 package root.controller;
 
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.GridPane;
@@ -15,14 +16,19 @@ public class ReversiBoardController extends Reversi implements Initializable {
 
     @FXML
     GridPane gridBoard;
-
+    private Reversi reversi;
     public static int turn = 1;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         createGridBoard(getBoard(), 75, 75);
+        setStoneOnBoard(3,3,1);
+        setStoneOnBoard(3,4,2);
+        setStoneOnBoard(4,3,2);
+        setStoneOnBoard(4,4,1);
     }
 
     public void createGridBoard(int[][] b, int i1, int i2){
+
         for (int i = 0; i < b[0].length; i++){
             for (int j = 0; j < b[1].length; j++){
                 Pane p = new Pane();
