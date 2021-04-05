@@ -46,12 +46,17 @@ public class TicTacToeBoardController extends TicTacToe implements Initializable
             switch (turn) {
                 case 1:
                     ImageView img_o = new ImageView(new Image("root/view/O.png"));
+                    img_o.setFitHeight(140);
+                    img_o.setFitWidth(140);
                     gridBoard.add(img_o, x, y);
+
                     this.turn = 2;
                     break;
                 case 2:
-                    ImageView img_X = new ImageView(new Image("root/view/X.png"));
-                    gridBoard.add(img_X, x, y);
+                    ImageView img_x = new ImageView(new Image("root/view/X.png"));
+                    img_x.setFitHeight(140);
+                    img_x.setFitWidth(140);
+                    gridBoard.add(img_x, x, y);
                     this.turn = 1;
                     break;
             }
