@@ -36,8 +36,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-        TicTacToe ttt = new TicTacToe();
-        ttt.Start();
     }
 
     public static void setScene(String path) {
@@ -54,10 +52,13 @@ public class Main extends Application {
     }
 
     public static void goToMain(KeyCode code) {
-        if(code.equals(KeyCode.ESCAPE)){
+        if (code.equals(KeyCode.ESCAPE)) {
             int dialogButton = 0;
-            int dialogResult = JOptionPane.showConfirmDialog (null, "Would you like to exit this game?","Warning",dialogButton);
-            if(dialogResult == JOptionPane.YES_OPTION){ setScene("view/main.fxml"); }
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Would you like to exit this game?", "Warning",
+                    dialogButton);
+            if (dialogResult == JOptionPane.YES_OPTION) {
+                setScene("view/main.fxml");
+            }
         }
     }
 }

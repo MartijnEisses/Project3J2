@@ -1,6 +1,5 @@
 package root.model;
 
-import java.io.BufferedReader;
 import java.util.Scanner;
 
 public class TicTacToe extends Board {
@@ -25,77 +24,83 @@ public class TicTacToe extends Board {
 
     }
 
-    public void Start() {
-
-        while (!endGame) {
-            boolean correctInput = false;
-
-            while (!correctInput) {
-                int m = in.nextInt();
-
-                if (turn % 2 == 0) {
-                    Move(m, Color.WHITE);
-                } else if (turn % 2 == 1) {
-                    Move(m, Color.BLACK);
-
-                }
-            }
+    public void Move(int position, int turn) {
+        Color color = Color.EMPTY; // only for initialization
+        if (turn % 2 == 0) {
+            color = Color.BLACK;
+        } else if (turn % 2 == 1) {
+            color = Color.WHITE;
         }
-    }
 
-    public void Move(int position, Color color) {
         switch (position) {
         case 0:
             if (ValidMove(0, 0)) {
                 board[0][0] = color.ordinal();
+                setStone(0, 0, turn);
             }
 
             break;
         case 1:
             if (ValidMove(0, 1)) {
                 board[0][1] = color.ordinal();
+                setStone(0, 1, turn);
+
             }
 
             break;
         case 2:
             if (ValidMove(0, 2)) {
                 board[0][2] = color.ordinal();
+                setStone(0, 2, turn);
+
             }
 
             break;
         case 3:
             if (ValidMove(1, 0)) {
                 board[1][0] = color.ordinal();
+                setStone(1, 0, turn);
+
             }
 
             break;
         case 4:
             if (ValidMove(1, 1)) {
                 board[1][1] = color.ordinal();
+                setStone(1, 1, turn);
+
             }
 
             break;
         case 5:
             if (ValidMove(1, 2)) {
                 board[1][2] = color.ordinal();
+                setStone(1, 2, turn);
+
             }
 
             break;
         case 6:
             if (ValidMove(2, 0)) {
                 board[2][0] = color.ordinal();
+                setStone(2, 0, turn);
+
             }
 
             break;
         case 7:
             if (ValidMove(2, 1)) {
                 board[2][1] = color.ordinal();
+                setStone(2, 1, turn);
+
             }
 
             break;
         case 8:
             if (ValidMove(2, 2)) {
                 board[2][2] = color.ordinal();
+                setStone(2, 2, turn);
+
             }
             break;
         default:
@@ -193,5 +198,6 @@ public class TicTacToe extends Board {
 
     private void Win(Color winner) {
         System.out.println(winner + " HAS WON!!");
+        // TODO: Call win function in the main class?!?!
     }
 }

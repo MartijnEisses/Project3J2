@@ -20,7 +20,6 @@ public class TicTacToeBoardController extends TicTacToe implements Initializable
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         createGridBoard(getBoard(), 175, 175);
-        TicTacToe ttt = new TicTacToe();
     }
 
     public void createGridBoard(int[][] b, int i1, int i2) {
@@ -43,7 +42,8 @@ public class TicTacToeBoardController extends TicTacToe implements Initializable
 
     public void setStoneOnBoard(int x, int y, int turn) {
         if (isEmpty(x, y)) {
-            setStone(x, y, turn);
+            // setStone(x, y, turn); // Moved to TTT
+
             switch (turn % 2) {
             case 1:
                 ImageView img_o = new ImageView(new Image("root/view/O.png"));
