@@ -44,7 +44,6 @@ public class TicTacToe extends Board {
             if (ValidMove(0, 1)) {
                 board[0][1] = color.ordinal();
                 setStone(0, 1, turn);
-
             }
 
             break;
@@ -52,7 +51,6 @@ public class TicTacToe extends Board {
             if (ValidMove(0, 2)) {
                 board[0][2] = color.ordinal();
                 setStone(0, 2, turn);
-
             }
 
             break;
@@ -60,7 +58,6 @@ public class TicTacToe extends Board {
             if (ValidMove(1, 0)) {
                 board[1][0] = color.ordinal();
                 setStone(1, 0, turn);
-
             }
 
             break;
@@ -68,7 +65,6 @@ public class TicTacToe extends Board {
             if (ValidMove(1, 1)) {
                 board[1][1] = color.ordinal();
                 setStone(1, 1, turn);
-
             }
 
             break;
@@ -76,7 +72,6 @@ public class TicTacToe extends Board {
             if (ValidMove(1, 2)) {
                 board[1][2] = color.ordinal();
                 setStone(1, 2, turn);
-
             }
 
             break;
@@ -84,7 +79,6 @@ public class TicTacToe extends Board {
             if (ValidMove(2, 0)) {
                 board[2][0] = color.ordinal();
                 setStone(2, 0, turn);
-
             }
 
             break;
@@ -92,7 +86,6 @@ public class TicTacToe extends Board {
             if (ValidMove(2, 1)) {
                 board[2][1] = color.ordinal();
                 setStone(2, 1, turn);
-
             }
 
             break;
@@ -100,7 +93,6 @@ public class TicTacToe extends Board {
             if (ValidMove(2, 2)) {
                 board[2][2] = color.ordinal();
                 setStone(2, 2, turn);
-
             }
             break;
         default:
