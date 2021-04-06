@@ -16,15 +16,16 @@ public class TicTacToeBoardController extends TicTacToe implements Initializable
     @FXML
     GridPane gridBoard;
 
-    public static int turn = 1;
+    public int turn = 1;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         createGridBoard(getBoard(), 175, 175);
+        TicTacToe ttt = new TicTacToe();
     }
 
-    public void createGridBoard(int[][] b, int i1, int i2){
-        for (int i = 0; i < b[0].length; i++){
-            for (int j = 0; j < b[1].length; j++){
+    public void createGridBoard(int[][] b, int i1, int i2) {
+        for (int i = 0; i < b[0].length; i++) {
+            for (int j = 0; j < b[1].length; j++) {
                 Pane p = new Pane();
                 p.setMinSize(i1, i2);
                 p.setLayoutX(i);
@@ -41,24 +42,24 @@ public class TicTacToeBoardController extends TicTacToe implements Initializable
     }
 
     public void setStoneOnBoard(int x, int y, int turn) {
-        if(isEmpty(x, y)){
+        if (isEmpty(x, y)) {
             setStone(x, y, turn);
-            switch (turn) {
-                case 1:
-                    ImageView img_o = new ImageView(new Image("root/view/O.png"));
-                    img_o.setFitHeight(140);
-                    img_o.setFitWidth(140);
-                    gridBoard.add(img_o, x, y);
+            switch (turn % 2) {
+            case 1:
+                ImageView img_o = new ImageView(new Image("root/view/O.png"));
+                img_o.setFitHeight(140);
+                img_o.setFitWidth(140);
+                gridBoard.add(img_o, x, y);
 
-                    this.turn = 2;
-                    break;
-                case 2:
-                    ImageView img_x = new ImageView(new Image("root/view/X.png"));
-                    img_x.setFitHeight(140);
-                    img_x.setFitWidth(140);
-                    gridBoard.add(img_x, x, y);
-                    this.turn = 1;
-                    break;
+                this.turn++;
+                break;
+            case 0:
+                ImageView img_x = new ImageView(new Image("root/view/X.png"));
+                img_x.setFitHeight(140);
+                img_x.setFitWidth(140);
+                gridBoard.add(img_x, x, y);
+                this.turn++;
+                break;
             }
         }
     }

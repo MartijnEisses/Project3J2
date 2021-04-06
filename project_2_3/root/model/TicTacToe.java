@@ -26,56 +26,85 @@ public class TicTacToe extends Board {
     }
 
     public void Start() {
-        DrawBoard(board);
-        System.out.println("write x coord [enter] y coord [enter]");
-
-        System.out.println("The Board");
-        System.out.println("  0 1 2");
-        System.out.println("0 * * *");
-        System.out.println("1 * * *");
-        System.out.println("2 * * *");
 
         while (!endGame) {
+            boolean correctInput = false;
 
-            System.out.println("Player 1:");
-            int x = in.nextInt();
-            int y = in.nextInt();
+            while (!correctInput) {
+                int m = in.nextInt();
 
-            Move(x, y, Color.WHITE);
+                if (turn % 2 == 0) {
+                    Move(m, Color.WHITE);
+                } else if (turn % 2 == 1) {
+                    Move(m, Color.BLACK);
 
-            if (CheckForWin()) {
-                endGame = true;
+                }
             }
-
-            System.out.println("Player 2:");
-            int X = in.nextInt();
-            int Y = in.nextInt();
-
-            Move(X, Y, Color.BLACK);
-
-            if (CheckForWin()) {
-                endGame = true;
-            }
-
         }
     }
 
-    public void Move(int x, int y, Color color) {
-        if (ValidMove(x, y)) {
-            board[x][y] = color.ordinal();
-            CheckForWin();
-        }
-        DrawBoard(board);
-
-    }
-
-    public void DrawBoard(int[][] board) {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[1].length; j++) {
-                System.out.print(GetValue(board[i][j]));
+    public void Move(int position, Color color) {
+        switch (position) {
+        case 0:
+            if (ValidMove(0, 0)) {
+                board[0][0] = color.ordinal();
             }
-            System.out.print("\n");
+
+            break;
+        case 1:
+            if (ValidMove(0, 1)) {
+                board[0][1] = color.ordinal();
+            }
+
+            break;
+        case 2:
+            if (ValidMove(0, 2)) {
+                board[0][2] = color.ordinal();
+            }
+
+            break;
+        case 3:
+            if (ValidMove(1, 0)) {
+                board[1][0] = color.ordinal();
+            }
+
+            break;
+        case 4:
+            if (ValidMove(1, 1)) {
+                board[1][1] = color.ordinal();
+            }
+
+            break;
+        case 5:
+            if (ValidMove(1, 2)) {
+                board[1][2] = color.ordinal();
+            }
+
+            break;
+        case 6:
+            if (ValidMove(2, 0)) {
+                board[2][0] = color.ordinal();
+            }
+
+            break;
+        case 7:
+            if (ValidMove(2, 1)) {
+                board[2][1] = color.ordinal();
+            }
+
+            break;
+        case 8:
+            if (ValidMove(2, 2)) {
+                board[2][2] = color.ordinal();
+            }
+            break;
+        default:
+            break;
         }
+        if (CheckForWin()) {
+            endGame = true;
+        }
+
     }
 
     public Boolean ValidMove(int x, int y) {
@@ -84,15 +113,6 @@ public class TicTacToe extends Board {
         } else
             System.out.println("INVALID MOVE");
         return false;
-    }
-
-    private String GetValue(int value) {
-        if (value == Color.BLACK.ordinal()) {
-            return "X";
-        } else if (value == Color.WHITE.ordinal()) {
-            return "O";
-        } else
-            return "*";
     }
 
     private boolean CheckForWin() {
