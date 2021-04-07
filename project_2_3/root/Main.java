@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import root.model.TicTacToe;
 import root.server.ServerCommands;
 import root.server.ServerReceiver;
+import root.connection;
 
 import javax.swing.*;
 import java.io.IOException;

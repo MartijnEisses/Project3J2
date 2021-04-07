@@ -67,11 +67,11 @@ public class configSenderController extends configSender implements Initializabl
        // AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, ErrorMessage, "Correct registration!", "Goodluck and may you WIN! " + ignField.getText());
         System.out.println("Connected to: " + ipField.getText() + " on port : " + portField.getText());
 
-        if(Main.newConnection.connection(ipField.getText(), Integer.parseInt(portField.getText()))){
+        if(Main.newConnection.connect(ipField.getText(), Integer.parseInt(portField.getText()))){
            // Main.newConnection.addObserver();
             Main.newConnection.login(ignField.getText());
         }
-         else if(Main.newConnection.connection(ipField.getText(), Integer.parseInt(portField.getText())))
+         else if(Main.newConnection.connect(ipField.getText(), Integer.parseInt(portField.getText())))
             AlertHelper.showAlert(Alert.AlertType.ERROR, ErrorMessage,"Connection Failure", "Ip: " + ipField.getText() + " port: " + "is refused please check the IP and port again!");
         return;
     }
