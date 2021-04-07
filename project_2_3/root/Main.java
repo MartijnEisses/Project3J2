@@ -9,12 +9,16 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import root.model.TicTacToe;
+import root.server.ServerCommands;
+import root.server.ServerReceiver;
+
 import javax.swing.*;
 import java.io.IOException;
 
 public class Main extends Application {
 
     public static Stage primaryStage;
+    public static ServerCommands newConnection;
 
     @FXML
     public static Parent root;
@@ -35,6 +39,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        newConnection = new ServerCommands();
         launch(args);
     }
 

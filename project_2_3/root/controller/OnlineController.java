@@ -34,7 +34,7 @@ public class OnlineController extends Online implements Initializable {
     }
     @FXML
     protected void handleMainMenuButton(ActionEvent event){
-        setScene("view/main.fxml");
+        setScene("view/mains.fxml");
     }
 
 

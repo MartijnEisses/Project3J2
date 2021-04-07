@@ -12,18 +12,49 @@ import java.util.concurrent.Executors;
 public class Connection {
     static Socket socket;
     static PrintWriter writer;
+    private static String ip;
+    private static int port;
 
-    public static void main(String[] args) {
+    public Connection(){
+       ip = "145.33.225.170";
+       port  = 7789;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public static boolean connectToServer(String ip, int port){
+
         try {
-            socket = new Socket("145.33.225.170", 7789);
+            socket = new Socket(ip, port);
             writer = new PrintWriter(socket.getOutputStream(), true);
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
         ExecutorService executorService = Executors.newFixedThreadPool(2);
         executorService.execute(new ReadLines());
         executorService.execute(new Conversation());
         executorService.shutdown();
+        return true;
+    }
+
+
+    public static void main(String[] args) {
+        connectToServer(ip, port);
     }
 
     public static class ReadLines implements Runnable {

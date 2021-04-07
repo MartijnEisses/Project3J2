@@ -49,7 +49,7 @@ public class MainController implements Initializable {
 
     @FXML
     protected void handleOnlineButtonAction(ActionEvent event){
-        setScene("view/online.fxml");
+        setScene("view/config.fxml");
 
     }
 

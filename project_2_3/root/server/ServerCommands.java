@@ -1,16 +1,27 @@
 package root.server;
+import root.Connection;
+import root.controller.configSenderController;
+
 
 import java.util.concurrent.BlockingDeque;// FIFO principe voor het versturen van commands
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class ServerCommands {
     private LinkedBlockingQueue commandQueue;
-
+    private Connection newConnection;
 
     public ServerCommands(){
         commandQueue = new LinkedBlockingQueue<>();
 
 
+    }
+
+    public boolean connection(String ip, int port){
+
+
+        newConnection = new Connection();
+
+        return false;
     }
 
 
@@ -49,6 +60,11 @@ public class ServerCommands {
     public void getHelp(){
         commandQueue.add("help");
     }
+
+    public void addObserver(Observers observer){
+
+    }
+
 
 
 }
