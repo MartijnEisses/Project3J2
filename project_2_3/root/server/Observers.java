@@ -1,8 +1,8 @@
-package root.model;
+package root.server;
 
 import java.util.ArrayList;
 
-public class Observers implements ObserverMethodsInterface{
+public class Observers implements ObserverMethodsInterface {
 
     private ArrayList<ObserverInterface> observers;
 

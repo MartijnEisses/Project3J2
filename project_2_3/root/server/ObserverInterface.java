@@ -1,4 +1,4 @@
-package root.model;
+package root.server;
 
 public interface ObserverInterface {
     void update();

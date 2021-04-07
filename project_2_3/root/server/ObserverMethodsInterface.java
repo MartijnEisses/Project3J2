@@ -1,4 +1,6 @@
-package root.model;
+package root.server;
+
+import root.server.ObserverInterface;
 
 public interface ObserverMethodsInterface {
     void registerObserver(ObserverInterface observer);

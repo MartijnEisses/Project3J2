@@ -17,10 +17,9 @@
 <?import java.net.URL?>
 <GridPane fx:id="gridBoard" fx:controller="root.controller.OnlineController" xmlns:fx="http://javafx.com/fxml" styleClass="boardBackground" alignment="center" gridLinesVisible="true">
 
-    <Button fx:id="mainButton" styleClass="mainButton" text="Main Menu" onAction="#handleMainMenuButton"  GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-
     <Label styleClass="playerListLabel" text="Player list:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
 
+    <Button fx:id="mainButton" styleClass="mainButton" text="Main Menu" onAction="#handleMainMenuButton"  GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
     <stylesheets>
         <URL value="@Style.css" />
