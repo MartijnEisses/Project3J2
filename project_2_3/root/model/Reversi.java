@@ -80,44 +80,10 @@ public class Reversi extends Board {
     }
     */
 
-    /*
-    Method to count the current stones per color.
-     */
-    private int[] getTileCount(){
-        int black = 0;
-        int white = 0;
-
-        for(int i = 0; i < 8; i++){
-            for(int j = 0; j< 8; j++){
-                if(this.getStone(i,j)== 1){
-                    black++;
-                } else if(this.getStone(i,j)== 2){
-                    white++;
-                }
-            }
-        }
-        return new int[] {black, white};
-    }
-
-    /*
 
 
-     */
-    private boolean isCellAvailable(int x, int y){
-        if(this.isEmpty(x,y)){
-            return true;
-        }else{
-            return false;
-        }
-    }
 
-    /*
 
-     */
-    private boolean isMoveLegal(int x, int y, int player) {
-
-      return false;
-    }
 
 
     /*

@@ -24,3 +24,22 @@
     -fx-font-size: 1.5em;
     -fx-background-color: #35c7de;
 }
+
+.onlineButton {
+    -fx-pref-height: 50px;
+    -fx-font-size: 1em;
+    -fx-background-color: #35c7de;
+}
+
+.playerListLabel {
+    -fx-font-size: 25px;
+    -fx-text-alignment: center;
+    -fx-font-weight: bold;
+}
+
+
+.mainButton{
+    -fx-pref-height: 50px;
+    -fx-font-size: 1em;
+    -fx-background-color: #35c7de;
+}

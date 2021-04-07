@@ -28,3 +28,9 @@
     -fx-font-size: 1.5em;
     -fx-background-color: #35c7de;
 }
+
+.onlineButton{
+    -fx-pref-height: 50px;
+    -fx-font-size: 1em;
+    -fx-background-color: #35c7de;
+}

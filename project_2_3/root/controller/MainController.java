@@ -47,6 +47,12 @@ public class MainController implements Initializable {
         }
     }
 
+    @FXML
+    protected void handleOnlineButtonAction(ActionEvent event){
+        setScene("view/online.fxml");
+
+    }
+
     public Games getSelectedGame(){
         Games r = Games.valueOf(selectGame.getSelectionModel().getSelectedItem());
         return r;

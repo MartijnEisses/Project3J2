@@ -20,6 +20,8 @@
 
     <Label styleClass="select_label" text="Project 2.3"  GridPane.rowIndex="0"/>
 
+    <Button text="Online"  onAction="#handleOnlineButtonAction" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+
     <ComboBox fx:id="combobox_select" styleClass="select_combobox" value="Select Game" GridPane.columnIndex="0" GridPane.rowIndex="1" >
         <items>
             <FXCollections fx:factory="observableArrayList">
