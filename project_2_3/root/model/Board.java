@@ -24,7 +24,7 @@ public class Board {
  *
  */
 
-    private int[][] board;
+    protected int[][] board;
 
     public Board(int x, int y) {
         this.board = new int[x][y];
@@ -38,6 +38,9 @@ public class Board {
         board[x][y] = value;
         System.out.println("Move is legal on position " + x + "-"  +y + " for player " + value);
     }
+    public void boardChange(int[][] newBord) {
+        board = newBord;
+    }
 
     public int getStone(int x, int y) {
         return board[x][y];
@@ -47,7 +50,7 @@ public class Board {
         return board[x][y] == 0;
     }
 
-    public void DrawBoard(String[][] board) {
+    public void drawBoard() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[1].length; j++) {
                 System.out.print(board[i][j]);

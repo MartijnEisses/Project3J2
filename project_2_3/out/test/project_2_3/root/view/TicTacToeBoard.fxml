@@ -15,7 +15,7 @@
 
 
 <?import java.net.URL?>
-<GridPane fx:id="gridBoard" fx:controller="root.controller.BoardController" xmlns:fx="http://javafx.com/fxml" styleClass="boardBackground" alignment="center" gridLinesVisible="true">
+<GridPane fx:id="gridBoard" fx:controller="root.controller.TicTacToeBoardController" xmlns:fx="http://javafx.com/fxml" styleClass="boardBackground" alignment="center" gridLinesVisible="true">
 
 
 

@@ -1,96 +1,450 @@
 package root.model;
 
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.List;
+
 public class Reversi extends Board {
 
     final double CORNERPLACE = 10;
     final double EDGEPLACE = 5;
     final double PLACENEXTCORNER = -10;
     double stonePosition[][] = new double[8][8];
+    private int currentPlayer; // wit is true - zwart is false
+    private int wit; // counter voor wit.
+    private int zwart;// counter voor zwart.
+    private boolean finished;
 
-
-/*
- * Reversi Board Cheat Sheet
- *
- * 0,0|1,0|2,0|3,0|4,0|5,0|6,0|7,0
- * -------------------------------
- * 0,1|1,1|2,1|3,1|4,1|5,1|6,1|7,1
- * -------------------------------
- * 0,2|1,2|2,2|3,2|4,2|5,2|6,2|7,2
- * -------------------------------
- * 0,3|1,3|2,3|3,3|4,3|5,3|6,3|7,3
- * -------------------------------
- * 0,4|1,4|2,4|3,4|4,4|5,4|6,4|7,4
- * -------------------------------
- * 0,5|1,5|2,5|3,5|4,5|5,5|6,5|7,5
- * -------------------------------
- * 0,6|1,6|2,6|3,6|4,6|5,6|6,6|7,6
- * -------------------------------
- * 0,7|1,7|2,7|3,7|4,7|5,7|6,7|7,7
- *
- */
 
 
     public Reversi() {
         super(8, 8);
-
     }
 
-    /*
+    public ArrayList<String> legalMoves(int[][] curBoard, int cp) {
+        int totChanges = 0;
+        int tempChanges = 0;
+        int[][] bard = Arrays.stream(curBoard).map(int[]::clone).toArray(int[][]::new);
+        int[][] bard2 = Arrays.stream(curBoard).map(int[]::clone).toArray(int[][]::new);
+        List<String> allMoves = new ArrayList<String>();
+        boolean change = false;
+
+        int checker1;
+        int checker2;
+        int curp = 1;
+        int nCurp = 2;
+        if (cp == 2) {
+            curp = 2;
+            nCurp = 1;
+        }
+
+        for (int x = 0; x < 8; x++) {
+            for (int y = 0; y < 8; y++) {
+                change = false;
+                // totChanges = 0;
+                if (curBoard[x][y] == 0) {
+                    try {
+                        if (curBoard[x + 1][y] == nCurp) {
+                            checker1 = x + 1;
+                            while (curBoard[checker1][y] == nCurp) {
+                                checker1++;
+                                // tempChanges++;
+
+                            }
+
+                            if (curBoard[checker1][y] == curp) {
+                                allMoves.add(y + "-" + x);
+                                change = true;
+                            }
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        // e.printStackTrace();
+                    }
+
+                    //tempChanges = 0;
+                    try {
+                        if (curBoard[x - 1][y] == nCurp) {
+                            checker1 = x - 1;
+
+                            while (curBoard[checker1][y] == nCurp) {
+
+                                //tempChanges++;
+                                checker1--;
+                            }
 
 
-     */
-    private enum Color {
-        BLACK, WHITE
+                            if (curBoard[checker1][y] == curp) {
+                                allMoves.add(y + "-" + x);
+                                change = true;
+                            }
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        //e.printStackTrace();
+                    }
+
+
+                    tempChanges = 0;
+                    try {
+                        if (curBoard[x][y + 1] == nCurp) {
+                            checker2 = y + 1;
+
+                            while (curBoard[x][checker2] == nCurp) {
+                                //tempChanges++;
+                                checker2++;
+
+                            }
+                            if (curBoard[x][checker2] == curp) {
+                                allMoves.add(y + "-" + x);
+                                change = true;
+                            }
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        // e.printStackTrace();
+                    }
+                    //tempChanges = 0;
+                    try {
+                        if (curBoard[x][y - 1] == nCurp) {
+                            checker2 = y - 1;
+
+                            while (curBoard[x][checker2] == nCurp) {
+                                //tempChanges++;
+
+                                checker2--;
+                            }
+
+
+                            if (curBoard[x][checker2] == curp) {
+                                allMoves.add(y + "-" + x);
+                                change = true;
+
+                            }
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        // e.printStackTrace();
+                    }
+                    //tempChanges = 0;
+                    try {
+                        if (curBoard[x + 1][y + 1] == nCurp) {
+                            checker1 = x + 1;
+                            checker2 = y + 1;
+
+                            while (curBoard[checker1][checker2] == nCurp) {
+
+                                checker1++;
+
+                                //tempChanges++;
+
+                                checker2++;
+
+
+                            }
+
+
+                            if (curBoard[checker1][checker2] == curp) {
+                                allMoves.add(y + "-" + x);
+                                change = true;
+
+                            }
+
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        // e.printStackTrace();
+                    }
+                    //tempChanges = 0;
+                    try {
+                        if (curBoard[x - 1][y - 1] == nCurp) {
+                            checker1 = x - 1;
+                            checker2 = y - 1;
+
+                            while (curBoard[checker1][checker2] == nCurp) {
+                                tempChanges++;
+
+                                checker1--;
+                                checker2--;
+
+
+                            }
+                            if (curBoard[checker1][checker2] == curp) {
+                                allMoves.add(y + "-" + x);
+                                change = true;
+
+                            }
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        //e.printStackTrace();
+                    }
+
+                    //tempChanges = 0;
+                    try {
+                        if (curBoard[x + 1][y - 1] == nCurp) {
+                            checker1 = x + 1;
+                            checker2 = y - 1;
+
+                            while (curBoard[checker1][checker2] == nCurp) {
+
+                                checker1++;
+
+                                //tempChanges ++;
+
+                                checker2--;
+
+
+                            }
+                            if (curBoard[checker1][checker2] == curp) {
+                                allMoves.add(y + "-" + x);
+                                change = true;
+                            }
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        // e.printStackTrace();
+                    }
+                    //tempChanges = 0;
+                    try {
+                        if (curBoard[x - 1][y + 1] == nCurp) {
+                            checker1 = x - 1;
+                            checker2 = y + 1;
+
+                            while (curBoard[checker1][checker2] == nCurp) {
+                                //tempChanges++;
+
+                                checker1--;
+                                checker2++;
+                            }
+
+
+                            if (curBoard[checker1][checker2] == curp) {
+                                allMoves.add(y + "-" + x);
+                                change = true;
+                            }
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        //e.printStackTrace();
+                    }
+                }
+            }
+        }//if statement equals(".")
+        // for loop y
+        //for loop x
+        //tempChanges = 0;
+        // if(change) { allMoves.add(y + "-" + x + "_" + totChanges);}
+        return (ArrayList<String>) allMoves;
+    }//class
+
+    public boolean isInBounce(int x, int y){
+        if(x+1 != 8 && x-1 != -1 && y+1 != 8 && y-1 != -1){
+            return true;
+        }
+        return false;
     }
 
-    /*
+    public int[][] doMove(int[][] curBoard, int cp, int x, int y) {
+        int[][] bard = Arrays.stream(curBoard).map(int[]::clone).toArray(int[][]::new);
+        int[][] bard2 = Arrays.stream(curBoard).map(int[]::clone).toArray(int[][]::new);
+        boolean change = false;
 
+        //fullWord = move.split("_");
+        //int stenen = Integer.parseInt(fullWord[1]);
+        int checker1;
+        int checker2;
+        int curp = 2;
+        int nCurp = 1;
+        if (cp == 1) {
+            curp = 1;
+            nCurp = 2;
+        }
+        if (curBoard[x][y] == 0) {
+            if(x+1 != 8 ) {
+                if (curBoard[x + 1][y] == nCurp) {
+                    checker1 = x + 1;
+                    if (checker1 != 8) {
+                        while (curBoard[checker1][y] == nCurp) {
+                            // if (checker1 != -1 && checker1 != 8) {
+                            System.out.println("BEN");
+                            bard[checker1][y] = curp;
+                            checker1++;
+                            //}
+                        }
+                    }
+                    if (curBoard[checker1][y] == curp) {
+                        bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
+                        System.out.println("BEN_F");
+                        change = true;
+                    }
+                    bard = Arrays.stream(bard2).map(int[]::clone).toArray(int[][]::new);
+                }
+            }
+            if(x-1 != -1)  {
+                if (curBoard[x - 1][y] == nCurp) {
+                    checker1 = x - 1;
+                    if (x - 1 != -1) {
+                        while (curBoard[checker1][y] == nCurp) {
+                            System.out.println("BOV");
+                            bard[checker1][y] = curp;
+                            checker1--;
+                        }
 
-     */
-    private void bordPositions(){
-        //Posities in de hoeken.
-        stonePosition[0][0] = CORNERPLACE;
-        stonePosition[7][7] = CORNERPLACE;
-        stonePosition[0][7] = CORNERPLACE;
-        stonePosition[7][0] = CORNERPLACE;
-        //Posities naast de hoeken waar geen steen op moet komen.
-        stonePosition[1][0] = EDGEPLACE;
-        stonePosition[1][1] = EDGEPLACE;
-        stonePosition[0][1] = EDGEPLACE;
+                        if (curBoard[checker1][y] == curp) {
+                            bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
+                            System.out.println("BOV_F");
+                            change = true;
+                        }
+                    }
+                }
+            }
+            bard = Arrays.stream(bard2).map(int[]::clone).toArray(int[][]::new);
+            if(y+1 != 8)  {
+                if (curBoard[x][y + 1] == nCurp) {
+                    checker2 = y + 1;
+                    if (checker2 != 8 && checker2 != -1) {
+                        while (curBoard[x][checker2] == nCurp) {
+                            System.out.println("RE");
+                            //if (checker2 != 8 && checker2 != -1) {
+                   /* System.out.println("     0 1 2 3 4 5 6 7");
+                    for(int i =0; i< 8; i++){
 
-        stonePosition[6][1] = EDGEPLACE;
-        stonePosition[7][1] = EDGEPLACE;
-        stonePosition[6][0] = EDGEPLACE;
+                        System.out.print("  " + (i) + "  ");
+                        for(int p = 0; p< 8; p++){
+                            System.out.print(bard[i][p]);
+                        }
+                        System.out.println();
+                    }*/
+                            bard[x][checker2] = curp;
+                            checker2++;
+                        }
+                    }
+                    // }
+                    if (curBoard[x][checker2] == curp) {
+                        bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
+                        change = true;
+                        System.out.println("RE_F");
+                    }
+                }
+            }
+            bard = Arrays.stream(bard2).map(int[]::clone).toArray(int[][]::new);
+            if(y-1 != -1)  {
+                if (curBoard[x][y - 1] == nCurp) {
+                    checker2 = y - 1;
+                    if (checker2 != 8 && checker2 != -1) {
+                        while (curBoard[x][checker2] == nCurp) {
+                            // if (checker2 != 8 && checker2 != -1) {
+                            System.out.println("LI");
+                            bard[x][checker2] = curp;
+                            checker2--;
+                        }
+                    }
+                    // }
+                    if (curBoard[x][checker2] == curp) {
+                        bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
+                        change = true;
+                        System.out.println("LI_F");
 
-        stonePosition[6][6] = EDGEPLACE;
-        stonePosition[6][7] = EDGEPLACE;
-        stonePosition[7][6] = EDGEPLACE;
+                    }
+                }
+            }
+            bard = Arrays.stream(bard2).map(int[]::clone).toArray(int[][]::new);
+            if(x+1 != 8 & y+1 != 8 )  {
+                if (curBoard[x + 1][y + 1] == nCurp) {
+                    checker1 = x + 1;
+                    checker2 = y + 1;
+                    if(x+1 != 8 & y+1 != 8 ) {
+                        while (curBoard[checker1][checker2] == nCurp) {
+                            //  if (checker1 != -1 && checker1 != 8 && checker2 != -1 && checker2 != 8) {
+                            bard[checker1][checker2] = curp;
+                            System.out.println("SCH-BEN-REC");
+                            checker1++;
+                            checker2++;
 
-        stonePosition[1][6] = EDGEPLACE;
-        stonePosition[0][6] = EDGEPLACE;
-        stonePosition[1][7] = EDGEPLACE;
-    }
+                        }
+                    }
+                    // }
+                    if (curBoard[checker1][checker2] == curp) {
+                        bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
+                        change = true;
+                        System.out.println("SCH-BEN-REC_F");
 
-    /*
-    private enum Direction {
-        NORTH, NORTHWEST, NORTHEAST, SOUTH, SOUTHEAST, SOUTHWEST, WEST, EAST
-    }
-    */
+                    }
+                }
+            }
+            bard = Arrays.stream(bard2).map(int[]::clone).toArray(int[][]::new);
+            if(x-1 != -1 && y-1 != -1)  {
+                if (curBoard[x - 1][y - 1] == nCurp) {
+                    checker1 = x - 1;
+                    checker2 = y - 1;
+                    if (checker1 != -1  && checker2 != -1 ) {
+                        while (curBoard[checker1][checker2] == nCurp) {
+                            // if (checker1 != -1 && checker1 != 8 && checker2 != -1 && checker2 != 8) {
+                            System.out.println("SCH-BOV-LIN");
+                            bard[checker1][checker2] = curp;
+                            checker1--;
+                            checker2--;
 
+                        }
+                        // }
+                    }
+                    if (curBoard[checker1][checker2] == curp) {
+                        bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
+                        change = true;
+                        System.out.println("SCH-BOV-LIN_f");
 
+                    }
+                }
+            }
+            bard = Arrays.stream(bard2).map(int[]::clone).toArray(int[][]::new);
+            if(x+1 != 8 && y-1 != -1)  {
+                if (curBoard[x + 1][y - 1] == nCurp) {
+                    checker1 = x + 1;
+                    checker2 = y - 1;
+                    if (checker1 != 8 && checker2 != -1 ) {
+                        while (curBoard[checker1][checker2] == nCurp) {
+                            // if (checker1 != -1 && checker1 != 8 && checker2 != -1 && checker2 != 8) {
+                            System.out.println("SCH-BOV-REC");
+                            bard[checker1][checker2] = curp;
+                            checker1++;
+                            checker2--;
 
+                        }
+                        // }
+                    }
+                    if (curBoard[checker1][checker2] == curp) {
+                        bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
+                        change = true;
+                        System.out.println("SCH-BOV-REC_F");
+                    }
+                }
+            }
+            bard = Arrays.stream(bard2).map(int[]::clone).toArray(int[][]::new);
+            if(x-1 != -1 && y+1 != 8)  {
+                if (curBoard[x - 1][y + 1] == nCurp) {
+                    checker1 = x - 1;
+                    checker2 = y + 1;
+                    if(checker1 != -1 && checker2 != 8){
+                        while (curBoard[checker1][checker2] == nCurp) {
+                            //  if (checker1 != -1 && checker1 != 8 && checker2 != -1 && checker2 != 8) {
+                            System.out.println("SCH-BOV-LIN");
+                            bard[checker1][checker2] = curp;
+                            checker1--;
+                            checker2++;
 
+                        }
+                    }
+                    if (curBoard[checker1][checker2] == curp) {
+                        bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
+                        change = true;
+                        System.out.println("SCH-BOV-LIN_F");
 
+                    }
+                }
+            }
+            if (change == true) {
+                bard2[x][y] = curp;
+                return bard2;
+            }
 
-
-    /*
-        Minimax algorithm
-     */
-    private static int miniMax(){
-
-        return 0;
+        }
+        System.out.println("Move is not valid");
+        System.out.println("X is nu: " + y + " en y is: " + x);
+        return curBoard;
     }
 }
