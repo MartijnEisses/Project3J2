@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -13,8 +15,7 @@ public class Connection {
     static Socket socket;
     static PrintWriter writer;
     private static LinkedBlockingQueue<String> commandQueue;
-    private final String firstServerResponse = "Strategic Game Server Fixed [Version 1.1.0]\n" +
-            "(C) Copyright 2015 Hanzehogeschool Groningen";
+
     //PrintWriter is voor output
     //BufferedReader is voor input
 
@@ -23,7 +24,7 @@ public class Connection {
     }
 
     public void connectToServer(String ip, int port) {
-        System.out.println("ConnectToServer Werkt begin");
+        //System.out.println("ConnectToServer Werkt begin");
         System.out.println("Logging into server: " + ip + " on port: " + port);
         try {
             socket = new Socket(ip, port);
@@ -43,7 +44,7 @@ public class Connection {
         System.out.println("Logged in as: " + name);
         printQueue();
         popQueue();
-        printQueue();
+        //printQueue();
     }
 
     public void logout() {
@@ -58,12 +59,19 @@ public class Connection {
         commandQueue.add("get gamelist");
     }
 
-    public void acceptGameChallenge(int gameID) {
+    public static void acceptGameChallenge(int gameID) {
         commandQueue.add("challenge accept" + gameID);
     }
 
     public void challengePlayer(String opponent, String gamemode) {
         commandQueue.add("challenge " + opponent + gamemode);
+    }
+
+    public void subscribe(String game){
+        System.out.println("Subscribing to Reversi!");
+        commandQueue.add("subscribe " + game);
+        printQueue();
+        popQueue();
     }
 
     public void setMove(int position) {
@@ -78,13 +86,14 @@ public class Connection {
         commandQueue.add("help");
     }
 
-    public void printQueue() {
-        System.out.println(commandQueue);
+    public static void printQueue() {
+        System.out.println("Printing commandQueue: " + commandQueue);
     }
 
-    public void popQueue() {
-        Object test = commandQueue.peek();
+    public static void popQueue() {
+        String test = commandQueue.peek();
         commandQueue.remove(test);
+        printQueue();
     }
 
     public static String getFirstItemCommandQueue() {
@@ -98,12 +107,19 @@ public class Connection {
 
         @Override
         public void run() {
-            sendStringToServer(Connection.writer, Connection.getFirstItemCommandQueue());
+
+                System.out.println("Conversation  is reached");
+                sendStringToServer(Connection.writer, Connection.getFirstItemCommandQueue());
+
+
+
+
+               // e.printStackTrace();
+
         }
 
         public void sendStringToServer(PrintWriter writer, String command) {
             System.out.println("Sending command :" + command);
-            System.out.println("writer " + writer);
             writer.println(command);
         }
     }
@@ -112,13 +128,22 @@ public class Connection {
         BufferedReader reader;
         Interpreter interpreter = new Interpreter();
 
+        private List<String> firstServerResponse = Arrays.asList("Strategic Game Server Fixed [Version 1.1.0]",
+                "(C) Copyright 2015 Hanzehogeschool Groningen");
+
         @Override
         public void run() {
             buffReader();
             String line;
             try {
                 while ((line = reader.readLine()) != null) {
+                    //System.out.println("Readlines: " +line);
+                    if(line.equals(firstServerResponse)){
+                        continue;
+                    }
+                    System.out.println("Server Response: " +line);
                     interpreter.inputInterpreter(line);
+
                 }
             } catch (IOException e) {
                 e.printStackTrace();

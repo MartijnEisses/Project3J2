@@ -15,15 +15,13 @@ import root.model.Online;
 import root.model.Reversi;
 import java.net.URL;
 import java.util.ResourceBundle;
+import root.server.Connection;
 
 
 public class OnlineController extends Online implements Initializable {
 
 
     @FXML
-
-
-
     protected void setScene(String path) {
         Main.setScene(path);
     }
@@ -34,8 +32,20 @@ public class OnlineController extends Online implements Initializable {
     }
     @FXML
     protected void handleMainMenuButton(ActionEvent event){
-        setScene("view/mains.fxml");
+        setScene("view/main.fxml");
+    }
+
+    @FXML
+    protected void subscribeMenuButton(ActionEvent event){
+            System.out.println("Subscribe to Reversi is pressed!");
+           Main.newConnection.subscribe("Reversi");
     }
 
 
+    /*
+    Method to display all online players.
+     */
+    public void displayPlayerList(){
+
+    }
 }

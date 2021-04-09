@@ -20,11 +20,16 @@ public class test {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ExecutorService executorService = Executors.newFixedThreadPool(2);
-        executorService.execute(new ReadLines());
-        executorService.execute(new Conversation());
-        executorService.shutdown();
-    }
+        try {
+            ExecutorService executorService = Executors.newFixedThreadPool(2);
+            executorService.execute(new ReadLines());
+            executorService.execute(new Conversation());
+            executorService.shutdown();
+        } catch (ArrayIndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
+
+        }
 
     public static class ReadLines implements Runnable {
         BufferedReader reader;
