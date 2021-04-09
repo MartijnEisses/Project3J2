@@ -40,7 +40,7 @@
            GridPane.rowIndex="2" >
     </Label>
 
-    <TextField fx:id="ipField" prefHeight="40" text="145.33.225.170"
+    <TextField fx:id="ipField" prefHeight="40" text="127.0.0.1"
                GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
     <Label text="Port: " GridPane.columnIndex="0"

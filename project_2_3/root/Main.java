@@ -1,17 +1,13 @@
 package root;
 
 import javafx.application.Application;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import root.model.TicTacToe;
-import root.server.ServerCommands;
-import root.server.ServerReceiver;
-import root.connection;
+import root.server.connection;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -19,7 +15,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     public static Stage primaryStage;
-    public static ServerCommands newConnection;
+    public static connection newConnection;
 
     @FXML
     public static Parent root;
@@ -39,8 +35,8 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
-        newConnection = new ServerCommands();
+    public static void main(String[] args) throws IOException {
+        newConnection = new connection();
         launch(args);
     }
 
