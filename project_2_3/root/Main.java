@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import root.server.connection;
+import root.server.Connection;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     public static Stage primaryStage;
-    public static connection newConnection;
+    public static Connection newConnection;
 
     @FXML
     public static Parent root;
@@ -36,7 +36,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws IOException {
-        newConnection = new connection();
+        newConnection = new Connection();
         launch(args);
     }
 

@@ -4,7 +4,7 @@ import oldconnectiontest.ServerCommands;
 
 import java.util.Arrays;
 
-public class Interperter {
+public class Interpreter {
     private String GAMETYPE;
     private String PLAYERTOMOVE;
     private String OPPONENT;

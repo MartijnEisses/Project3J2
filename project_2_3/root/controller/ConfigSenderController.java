@@ -3,7 +3,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import root.Main;
-import root.server.configSender;
+import root.server.ConfigSender;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,7 +18,7 @@ import javafx.stage.Window;
     Method to put in the ip and port and name of player to connect to the server.
     @Author Jelmer de Haan.
  */
-public class configSenderController extends configSender implements Initializable {
+public class ConfigSenderController extends ConfigSender implements Initializable {
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
