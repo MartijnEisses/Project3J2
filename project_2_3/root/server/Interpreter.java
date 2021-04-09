@@ -1,6 +1,5 @@
 package root.server;
 
-import oldconnectiontest.ServerCommands;
 
 import java.util.Arrays;
 
@@ -8,11 +7,12 @@ public class Interpreter {
     private String GAMETYPE;
     private String PLAYERTOMOVE;
     private String OPPONENT;
-    private ServerCommands serverCommands;
+    private Connection connection;
     /*
         Note: zie protocol.txt op blackboard om de input te zien van de server
      */
-    public void inputInterperter(String inputCommand){
+    public void inputInterpreter(String inputCommand){
+        connection = new Connection();
         inputCommand = inputCommand.replaceAll("[A-Za-z0-9,]", "");
         String[] commands = inputCommand.split(" ");
         System.out.println(Arrays.toString(commands));
@@ -66,7 +66,7 @@ public class Interpreter {
                                         int gameID = Integer.parseInt(commands[8]);
                                         System.out.println("Challenged by " + commands[4] + " for game: " + commands[6] + " gameID :" + commands[8]);
                                         System.out.println("Sending challenge accept back!");
-                                        serverCommands.acceptGameChallenge(gameID);
+                                        connection.acceptGameChallenge(gameID);
                                         break;
                                     case "CANCELLED":
                                         //challenge is door de uitdager gecanceld

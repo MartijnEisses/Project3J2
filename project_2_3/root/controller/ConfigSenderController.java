@@ -70,7 +70,7 @@ public class ConfigSenderController extends ConfigSender implements Initializabl
             //System.out.println("test");
             Main.newConnection.connectToServer(ipField.getText(),Integer.parseInt(portField.getText()));
             Main.newConnection.login(ignField.getText());
-
+            setScene("view/online.fxml");
 
     }
 
