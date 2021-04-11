@@ -19,13 +19,6 @@ import javafx.stage.Window;
  */
 public class ConfigSenderController implements Initializable {
 
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
-
-    protected void setScene(String path) {
-        Main.setScene(path);
-    }
     @FXML
     private TextField ignField;
 
@@ -38,7 +31,15 @@ public class ConfigSenderController implements Initializable {
     @FXML
     private Button submitButton;
 
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        ignField.setText("aiGroep7");
+        ipField.setText("127.0.0.1");
+        portField.setText("7789");
+    }
 
+    protected void setScene(String path) {
+        Main.setScene(path);
+    }
 
     @FXML
     protected void handleSubmitButton(ActionEvent event) throws IOException {
