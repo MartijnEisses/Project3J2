@@ -41,36 +41,7 @@ public class TicTacToeBoardController extends TicTacToe implements Initializable
 
     public void setStoneOnBoard(int x, int y, int turn) {
         if (isEmpty(x, y)) {
-            // setStone(x, y, turn); // Moved to TTT
-
-            int position = 9;
-
-            if (x == 0) {
-                if (y == 0)
-                    position = 0;
-                if (y == 1)
-                    position = 1;
-                if (y == 2)
-                    position = 2;
-            }
-
-            if (x == 1) {
-                if (y == 0)
-                    position = 3;
-                if (y == 1)
-                    position = 4;
-                if (y == 2)
-                    position = 5;
-            }
-
-            if (x == 2) {
-                if (y == 0)
-                    position = 6;
-                if (y == 1)
-                    position = 7;
-                if (y == 2)
-                    position = 8;
-            }
+            setStone(x, y, turn);
 
             switch (turn % 2) {
             case 1:
@@ -78,7 +49,7 @@ public class TicTacToeBoardController extends TicTacToe implements Initializable
                 img_o.setFitHeight(140);
                 img_o.setFitWidth(140);
                 gridBoard.add(img_o, x, y);
-                Move(position, turn);
+                Move(boardPosition[x][y], turn);
                 this.turn++;
                 break;
             case 0:
@@ -86,7 +57,7 @@ public class TicTacToeBoardController extends TicTacToe implements Initializable
                 img_x.setFitHeight(140);
                 img_x.setFitWidth(140);
                 gridBoard.add(img_x, x, y);
-                Move(position, turn);
+                Move(boardPosition[x][y], turn);
                 this.turn++;
                 break;
             }

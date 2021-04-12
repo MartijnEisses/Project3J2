@@ -10,9 +10,11 @@ public class TicTacToe extends Board {
         BLACK, WHITE, EMPTY
     }
 
+    // AI is BLACK player is WHITE
     private int[][] board = { { Color.EMPTY.ordinal(), Color.EMPTY.ordinal(), Color.EMPTY.ordinal() },
             { Color.EMPTY.ordinal(), Color.EMPTY.ordinal(), Color.EMPTY.ordinal() },
             { Color.EMPTY.ordinal(), Color.EMPTY.ordinal(), Color.EMPTY.ordinal() } };
+    public int[][] boardPosition = { { 0, 1, 2 }, { 3, 4, 5 }, { 6, 7, 8 } };
 
     Board b;
     boolean endGame = false;
@@ -24,8 +26,33 @@ public class TicTacToe extends Board {
 
     }
 
+    public int BestMove() {
+        int bestScore = -1;
+        int bestMove = 0;
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                // is there an empty spot
+                if (board[i][j] == Color.EMPTY.ordinal()) {
+                    board[i][j] = Color.BLACK.ordinal();
+                    int score = Minimax(board);
+                    board[i][j] = Color.EMPTY.ordinal();
+                    if (score > bestScore) {
+                        bestScore = score;
+                        bestMove = boardPosition[i][j];
+                    }
+                }
+            }
+        }
+        return bestMove;
+    }
+
+    private int Minimax(int[][] board2) {
+        return 1;
+    }
+
     public void Move(int position, int turn) {
-        Color color = Color.EMPTY; // only for initialization
+        Color color = Color.EMPTY;
         if (turn % 2 == 0) {
             color = Color.BLACK;
         } else if (turn % 2 == 1) {
@@ -185,6 +212,9 @@ public class TicTacToe extends Board {
             return true;
         }
 
+        if (turn == 8) {
+            System.out.println("TIE");
+        }
         return false;
     }
 
