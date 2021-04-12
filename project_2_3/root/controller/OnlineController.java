@@ -1,7 +1,5 @@
 package root.controller;
 
-
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,6 +18,7 @@ import root.server.Connection;
 
 public class OnlineController extends Online implements Initializable {
 
+    private Online onlinemodel;
 
     @FXML
     protected void setScene(String path) {
@@ -37,15 +36,34 @@ public class OnlineController extends Online implements Initializable {
 
     @FXML
     protected void subscribeMenuButton(ActionEvent event){
-            System.out.println("Subscribe to Reversi is pressed!");
-           Main.newConnection.subscribe("Reversi");
+        //System.out.println("Subscribe to Reversi is pressed!");
+        Connection.subscribe("Reversi");
     }
-
 
     /*
     Method to display all online players.
      */
     public void displayPlayerList(){
-
+        Connection.getPlayerlist();
     }
+
+    public void displayGameList(){
+        Connection.getGamelist();
+    }
+
+    public void logoutMenuButton(){
+        Connection.logout();
+        setScene("view/main.fxml");
+    }
+
+    @FXML
+    private void acceptGameChallenge(){
+       // try{
+        //    Connection.acceptGameChallenge(Hier moet de gameID nog in van de table);
+       // }
+    }
+
+
+
+
 }

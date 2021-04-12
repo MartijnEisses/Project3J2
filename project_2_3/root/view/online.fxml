@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.*?>
 
 
+
 <?import java.net.URL?>
 <GridPane fx:id="gridBoard" fx:controller="root.controller.OnlineController" xmlns:fx="http://javafx.com/fxml" styleClass="background" alignment="center" gridLinesVisible="false">
 
@@ -41,8 +42,10 @@
         <Button fx:id="subscribeReversi" styleClass="subscribeReversi" text="Subscribe to Reversi" onAction="#subscribeMenuButton"/>
     </HBox>
 
+    <Button fx:id="logout" styleClass="subscribeReversi" text="Logout" onAction="#logoutMenuButton"  GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+
+
     <stylesheets>
         <URL value="@Style.css" />
     </stylesheets>
-
 </GridPane>

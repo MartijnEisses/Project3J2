@@ -1,5 +1,8 @@
 package root.server;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,6 +10,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -14,13 +18,19 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class Connection {
     static Socket socket;
     static PrintWriter writer;
-    private static LinkedBlockingQueue<String> commandQueue;
-
+    private static BlockingQueue<String> commandQueue;
+   // private Thread thread;
+    //private Conversation conversation;
+  //  private ReadLines readLines;
+    //private PrintWriter out;
+    //private BufferedReader in;
     //PrintWriter is voor output
     //BufferedReader is voor input
 
-    public Connection() {
+    public Connection() throws IOException {
         commandQueue = new LinkedBlockingQueue<>();
+       // out = new PrintWriter(socket.getOutputStream(), true);
+        //in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
 
     public void connectToServer(String ip, int port) {
@@ -29,13 +39,15 @@ public class Connection {
         try {
             socket = new Socket(ip, port);
             writer = new PrintWriter(socket.getOutputStream(), true);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         ExecutorService executorService = Executors.newFixedThreadPool(2);
         executorService.execute(new ReadLines());
         executorService.execute(new Conversation());
-        // executorService.shutdown();
+
     }
 
     public void login(String name) {
@@ -47,31 +59,35 @@ public class Connection {
         //printQueue();
     }
 
-    public void logout() {
+    public static void logout() {
         commandQueue.add("logout");
     }
 
-    public void getPlayerlist() {
+    public static void getPlayerlist() {
         commandQueue.add("get playerlist");
     }
 
-    public void getGamelist() {
+    public static void getGamelist() {
         commandQueue.add("get gamelist");
     }
 
     public static void acceptGameChallenge(int gameID) {
-        commandQueue.add("challenge accept" + gameID);
+        System.out.println("Start acceptGameChallenge, sending challenge accept!");
+        commandQueue.add("challenge accept " + gameID);
+        printQueue();
+        popQueue();
     }
 
     public void challengePlayer(String opponent, String gamemode) {
         commandQueue.add("challenge " + opponent + gamemode);
     }
 
-    public void subscribe(String game){
+    public static void subscribe(String game){
         System.out.println("Subscribing to Reversi!");
         commandQueue.add("subscribe " + game);
         printQueue();
         popQueue();
+        //printQueue();
     }
 
     public void setMove(int position) {
@@ -93,41 +109,45 @@ public class Connection {
     public static void popQueue() {
         String test = commandQueue.peek();
         commandQueue.remove(test);
-        printQueue();
+        //printQueue();
     }
 
-    public static String getFirstItemCommandQueue() {
-        String returner = commandQueue.peek();
-        System.out.println(returner);
-        return returner;
+    public static BlockingQueue<String> getCommandQueue() {
+        return commandQueue;
     }
+
 
 
     static class Conversation implements Runnable {
-
+        boolean runner  = true;
+        static BlockingQueue<String> queue = Connection.getCommandQueue();
+        String command;
         @Override
         public void run() {
-
-                System.out.println("Conversation  is reached");
-                sendStringToServer(Connection.writer, Connection.getFirstItemCommandQueue());
-
-
-
-
-               // e.printStackTrace();
-
+            while(runner) {
+                try {
+                    while ((command = queue.poll()) != null) {
+                    //System.out.println("Conversation  is reached");
+                    sendStringToServer(Connection.writer, command);
+                     if(command.equals("logout")){runner = false;}
+                    // e.printStackTrace();
+                     }
+                } catch (NullPointerException e) {
+                    //e.printStackTrace();
+                }
+            }
         }
 
-        public void sendStringToServer(PrintWriter writer, String command) {
-            System.out.println("Sending command :" + command);
+        public static void sendStringToServer(PrintWriter writer, String command) {
+            //System.out.println("Sending command :" + command);
             writer.println(command);
+            writer.flush();
         }
     }
 
     static class ReadLines implements Runnable {
         BufferedReader reader;
         Interpreter interpreter = new Interpreter();
-
         private List<String> firstServerResponse = Arrays.asList("Strategic Game Server Fixed [Version 1.1.0]",
                 "(C) Copyright 2015 Hanzehogeschool Groningen");
 
@@ -145,7 +165,7 @@ public class Connection {
                     interpreter.inputInterpreter(line);
 
                 }
-            } catch (IOException e) {
+            } catch (ArrayIndexOutOfBoundsException  | IOException e) {
                 e.printStackTrace();
             }
         }
@@ -154,12 +174,13 @@ public class Connection {
         void buffReader() {
             try {
                 reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            } catch (IOException e) {
+            } catch (ArrayIndexOutOfBoundsException| IOException e) {
                 e.printStackTrace();
             }
         }
 
     }
+
 }
 
 

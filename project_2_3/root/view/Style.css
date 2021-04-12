@@ -51,3 +51,10 @@
     -fx-font-size: 1em;
     -fx-background-color: #35c7de;
 }
+
+.logout{
+    -fx-pref-height: 50px;
+    -fx-font-size: 1em;
+    -fx-background-color: #ff0000;
+}
+
