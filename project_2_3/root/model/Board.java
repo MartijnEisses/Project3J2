@@ -3,26 +3,19 @@ package root.model;
 import javafx.scene.layout.Pane;
 
 public class Board {
-/*
- * Reversi Board Cheat Sheet
- *
- * 0,0|1,0|2,0|3,0|4,0|5,0|6,0|7,0
- * -------------------------------
- * 0,1|1,1|2,1|3,1|4,1|5,1|6,1|7,1
- * -------------------------------
- * 0,2|1,2|2,2|3,2|4,2|5,2|6,2|7,2
- * -------------------------------
- * 0,3|1,3|2,3|3,3|4,3|5,3|6,3|7,3
- * -------------------------------
- * 0,4|1,4|2,4|3,4|4,4|5,4|6,4|7,4
- * -------------------------------
- * 0,5|1,5|2,5|3,5|4,5|5,5|6,5|7,5
- * -------------------------------
- * 0,6|1,6|2,6|3,6|4,6|5,6|6,6|7,6
- * -------------------------------
- * 0,7|1,7|2,7|3,7|4,7|5,7|6,7|7,7
- *
- */
+    /*
+     * Reversi Board Cheat Sheet
+     *
+     * 0,0|1,0|2,0|3,0|4,0|5,0|6,0|7,0 -------------------------------
+     * 0,1|1,1|2,1|3,1|4,1|5,1|6,1|7,1 -------------------------------
+     * 0,2|1,2|2,2|3,2|4,2|5,2|6,2|7,2 -------------------------------
+     * 0,3|1,3|2,3|3,3|4,3|5,3|6,3|7,3 -------------------------------
+     * 0,4|1,4|2,4|3,4|4,4|5,4|6,4|7,4 -------------------------------
+     * 0,5|1,5|2,5|3,5|4,5|5,5|6,5|7,5 -------------------------------
+     * 0,6|1,6|2,6|3,6|4,6|5,6|6,6|7,6 -------------------------------
+     * 0,7|1,7|2,7|3,7|4,7|5,7|6,7|7,7
+     *
+     */
 
     protected int[][] board;
 
@@ -36,8 +29,10 @@ public class Board {
 
     public void setStone(int x, int y, int value) {
         board[x][y] = value;
-        System.out.println("Move is legal on position " + x + "-"  +y + " for player " + value);
+        // System.out.println("Move is legal on position " + x + "-" +y + " for player "
+        // + value);
     }
+
     public void boardChange(int[][] newBord) {
         board = newBord;
     }
@@ -58,28 +53,37 @@ public class Board {
             System.out.print("\n");
         }
     }
+
     public boolean fullBoard() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[1].length; j++) {
-                if(board[i][j] == 0){return false;}
+                if (board[i][j] == 0) {
+                    return false;
+                }
             }
 
         }
         return true;
     }
+
     public boolean winner() {
         int w = 0;
         int z = 0;
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[1].length; j++) {
-                if(board[i][j] == 1){z++;}
-                else{w++;}
+                if (board[i][j] == 1) {
+                    z++;
+                } else {
+                    w++;
+                }
             }
 
         }
-        if(z > w){return true;}
-        else{return false;}
+        if (z > w) {
+            return true;
+        } else {
+            return false;
+        }
     }
-
 
 }

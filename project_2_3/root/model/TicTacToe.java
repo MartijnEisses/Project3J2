@@ -1,5 +1,7 @@
 package root.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class TicTacToe extends Board {
@@ -15,31 +17,37 @@ public class TicTacToe extends Board {
             { Color.EMPTY.ordinal(), Color.EMPTY.ordinal(), Color.EMPTY.ordinal() },
             { Color.EMPTY.ordinal(), Color.EMPTY.ordinal(), Color.EMPTY.ordinal() } };
     public int[][] boardPosition = { { 0, 1, 2 }, { 3, 4, 5 }, { 6, 7, 8 } };
+    public int[][] oBoardPosition = { { 0, 0 }, { 0, 1 }, { 0, 2 }, { 1, 0 }, { 1, 1 }, { 1, 2 }, { 2, 0 }, { 2, 1 },
+            { 2, 2 } };
+    private Map<Color, Integer> scores = new HashMap<Color, Integer>();
 
     Board b;
     boolean endGame = false;
-    int turn = 0;
+    int turn = 1;
 
     public TicTacToe() {
         super(3, 3);
         b = new Board(3, 3);
-
+        scores.put(Color.BLACK, 10);
+        scores.put(Color.WHITE, -10);
+        scores.put(Color.EMPTY, 0);
     }
 
     public int BestMove() {
-        int bestScore = -1;
+        int bestScore = Integer.MIN_VALUE;
         int bestMove = 0;
 
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
                 // is there an empty spot
-                if (board[i][j] == Color.EMPTY.ordinal()) {
-                    board[i][j] = Color.BLACK.ordinal();
-                    int score = Minimax(board);
-                    board[i][j] = Color.EMPTY.ordinal();
+                if (board[j][i] == Color.EMPTY.ordinal()) {
+                    board[j][i] = Color.BLACK.ordinal();
+                    int score = Minimax(board, 0, false);
+                    board[j][i] = Color.EMPTY.ordinal();
                     if (score > bestScore) {
                         bestScore = score;
-                        bestMove = boardPosition[i][j];
+                        bestMove = boardPosition[j][i];
+                        System.out.println(i + "  " + j);
                     }
                 }
             }
@@ -47,8 +55,47 @@ public class TicTacToe extends Board {
         return bestMove;
     }
 
-    private int Minimax(int[][] board2) {
-        return 1;
+    private int Minimax(int[][] board, int depth, boolean isMaximizing) {
+        Color winner = CheckForWin();
+        if (winner != null) {
+            return scores.get(winner);
+        }
+
+        if (isMaximizing) {
+            int bestScore = Integer.MIN_VALUE;
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board.length; j++) {
+                    // is there an empty spot
+                    if (board[j][i] == Color.EMPTY.ordinal()) {
+                        board[j][i] = Color.BLACK.ordinal();
+                        int score = Minimax(board, depth + 1, false);
+                        board[j][i] = Color.EMPTY.ordinal();
+                        if (score > bestScore) {
+                            bestScore = score;
+                        }
+                    }
+                }
+            }
+            return bestScore;
+        } else {
+            {
+                int bestScore = Integer.MAX_VALUE;
+                for (int i = 0; i < board.length; i++) {
+                    for (int j = 0; j < board.length; j++) { // is there an empty spot
+                        if (board[j][i] == Color.EMPTY.ordinal()) {
+                            board[j][i] = Color.WHITE.ordinal();
+                            int score = Minimax(board, depth + 1, true);
+                            board[j][i] = Color.EMPTY.ordinal();
+                            if (score < bestScore) {
+                                bestScore = score;
+                            }
+                        }
+                    }
+                }
+                return bestScore;
+            }
+        }
+
     }
 
     public void Move(int position, int turn) {
@@ -58,6 +105,8 @@ public class TicTacToe extends Board {
         } else if (turn % 2 == 1) {
             color = Color.WHITE;
         }
+
+        System.out.println(color + " Made a move on position: " + position + " on turn " + turn);
 
         switch (position) {
         case 0:
@@ -125,9 +174,6 @@ public class TicTacToe extends Board {
         default:
             break;
         }
-        if (CheckForWin()) {
-            endGame = true;
-        }
 
     }
 
@@ -139,87 +185,76 @@ public class TicTacToe extends Board {
         return false;
     }
 
-    private boolean CheckForWin() {
+    public Color CheckForWin() {
         if (board[0][0] == board[0][1] && board[0][1] == board[0][2] && board[0][0] == Color.BLACK.ordinal()) {
-            Win(Color.BLACK);
-            return true;
+            return Color.BLACK;
         }
         if (board[0][0] == board[0][1] && board[0][1] == board[0][2] && board[0][0] == Color.WHITE.ordinal()) {
-            Win(Color.WHITE);
-            return true;
+            return Color.WHITE;
         }
 
         if (board[1][0] == board[1][1] && board[1][1] == board[1][2] && board[1][0] == Color.BLACK.ordinal()) {
-            Win(Color.BLACK);
-            return true;
+            return Color.BLACK;
         }
         if (board[1][0] == board[1][1] && board[1][1] == board[1][2] && board[1][0] == Color.WHITE.ordinal()) {
-            Win(Color.WHITE);
-            return true;
+            return Color.WHITE;
         }
 
         if (board[2][0] == board[2][1] && board[2][1] == board[2][2] && board[2][0] == Color.BLACK.ordinal()) {
-            Win(Color.BLACK);
-            return true;
+            return Color.BLACK;
         }
         if (board[2][0] == board[2][1] && board[2][1] == board[2][2] && board[2][0] == Color.WHITE.ordinal()) {
-            Win(Color.WHITE);
-            return true;
+            return Color.WHITE;
         }
 
         if (board[0][0] == board[1][0] && board[1][0] == board[2][0] && board[0][0] == Color.BLACK.ordinal()) {
-            Win(Color.BLACK);
-            return true;
+            return Color.BLACK;
         }
         if (board[0][0] == board[1][0] && board[1][0] == board[2][0] && board[0][0] == Color.WHITE.ordinal()) {
-            Win(Color.WHITE);
-            return true;
+            return Color.WHITE;
         }
 
         if (board[0][1] == board[1][1] && board[1][1] == board[2][1] && board[0][1] == Color.BLACK.ordinal()) {
-            Win(Color.BLACK);
-            return true;
+            return Color.BLACK;
         }
         if (board[0][1] == board[1][1] && board[1][1] == board[2][1] && board[0][1] == Color.WHITE.ordinal()) {
-            Win(Color.WHITE);
-            return true;
+            return Color.WHITE;
         }
 
         if (board[0][2] == board[1][2] && board[1][2] == board[2][2] && board[0][2] == Color.BLACK.ordinal()) {
-            Win(Color.BLACK);
-            return true;
+            return Color.BLACK;
         }
         if (board[0][2] == board[1][2] && board[1][2] == board[2][2] && board[0][2] == Color.WHITE.ordinal()) {
-            Win(Color.WHITE);
-            return true;
+            return Color.WHITE;
         }
 
         if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] == Color.BLACK.ordinal()) {
-            Win(Color.BLACK);
-            return true;
+            return Color.BLACK;
         }
         if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] == Color.WHITE.ordinal()) {
-            Win(Color.WHITE);
-            return true;
+            return Color.WHITE;
         }
 
         if (board[2][0] == board[1][1] && board[1][1] == board[0][2] && board[2][0] == Color.BLACK.ordinal()) {
-            Win(Color.BLACK);
-            return true;
+            return Color.BLACK;
         }
         if (board[2][0] == board[1][1] && board[1][1] == board[0][2] && board[2][0] == Color.WHITE.ordinal()) {
-            Win(Color.WHITE);
-            return true;
+            return Color.WHITE;
         }
 
         if (turn == 8) {
-            System.out.println("TIE");
+            return Color.EMPTY;
         }
-        return false;
+        return null;
     }
 
-    private void Win(Color winner) {
-        System.out.println(winner + " HAS WON!!");
-        // TODO: Call win function in the main class?!?!
+    public void Win(Color winner) {
+        if (winner != Color.EMPTY) {
+            System.out.println(winner + " HAS WON!!");
+            // TODO: Call win function in the main class?!?!
+        } else {
+            System.out.println("It's a TIE");
+        }
+
     }
 }
