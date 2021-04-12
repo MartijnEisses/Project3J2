@@ -21,7 +21,7 @@
 <?import java.net.URL?>
 <GridPane fx:id="gridBoard" fx:controller="root.controller.ConfigSenderController" xmlns:fx="http://javafx.com/fxml" styleClass="background" alignment="center">
 
-    <Label text="Register:" GridPane.columnIndex="0"  GridPane.rowIndex="0" GridPane.columnSpan="2"  GridPane.rowSpan="1" GridPane.halignment="CENTER" >
+    <Label text="Settings:" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" GridPane.rowSpan="1" GridPane.halignment="CENTER" >
         <font>
             <Font name="Arial" size="24" ></Font>
         </font>
@@ -46,11 +46,11 @@
 
     <TextField fx:id="portField" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
-    <Button fx:id="submitButton" text="Submit"
+    <Button styleClass="subscribeReversi" fx:id="submitButton" text="Apply"
             prefWidth="100" prefHeight="40" defaultButton="true"
             GridPane.columnIndex="0" GridPane.rowIndex="4"
             GridPane.columnSpan="2" GridPane.rowSpan="1"
-            GridPane.halignment="CENTER"
+            GridPane.halignment="RIGHT"
             onAction="#handleSubmitButton">
         <GridPane.margin>
             <Insets top="20" right="0" bottom="20" left="0"></Insets>

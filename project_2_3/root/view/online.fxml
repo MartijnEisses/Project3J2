@@ -15,13 +15,31 @@
 
 
 <?import java.net.URL?>
-<GridPane fx:id="gridBoard" fx:controller="root.controller.OnlineController" xmlns:fx="http://javafx.com/fxml" styleClass="background" alignment="center" gridLinesVisible="true">
+<GridPane fx:id="gridBoard" fx:controller="root.controller.OnlineController" xmlns:fx="http://javafx.com/fxml" styleClass="background" alignment="center" gridLinesVisible="false">
 
-    <Label styleClass="playerListLabel" text="Player list:" GridPane.columnIndex="0" GridPane.rowIndex="0"> </Label>
+    <Label styleClass="playerListLabel" text="Available players:" GridPane.columnIndex="0" GridPane.rowIndex="0"> </Label>
+    <HBox minWidth="20" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <TableView fx:id="availablePlayersView" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <columns>
+                <TableColumn fx:id="availablePlayers" prefWidth="300" text="Available Players" />
+            </columns>
+        </TableView>
+    </HBox>
 
-    <Button fx:id="mainButton" styleClass="mainButton" text="Main Menu" onAction="#handleMainMenuButton"  GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <HBox minWidth="20" GridPane.columnIndex="1"></HBox>
 
-    <Button fx:id="subscribeReversi" styleClass="subscribeReversi" text="Subscribe to Reversi" onAction="#subscribeMenuButton"  GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+    <Label styleClass="playerListLabel" text="Incoming Challengers:" GridPane.columnIndex="2" GridPane.rowIndex="0"> </Label>
+    <HBox minWidth="20" GridPane.columnIndex="2" GridPane.rowIndex="1">
+        <TableView fx:id="challengersView" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <columns>
+                <TableColumn fx:id="challengers" prefWidth="300" text="Challengers" />
+            </columns>
+        </TableView>
+    </HBox>
+
+    <HBox GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-padding: 5px;">
+        <Button fx:id="subscribeReversi" styleClass="subscribeReversi" text="Subscribe to Reversi" onAction="#subscribeMenuButton"/>
+    </HBox>
 
     <stylesheets>
         <URL value="@Style.css" />
