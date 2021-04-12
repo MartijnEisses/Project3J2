@@ -3,22 +3,27 @@ package root.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
-import javafx.scene.paint.Color;
+import javafx.scene.control.TableView;
 import root.Main;
-import root.model.Game;
 import root.model.Online;
-import root.model.Reversi;
+
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
+
 import root.server.Connection;
 
 
 public class OnlineController extends Online implements Initializable {
 
     private Online onlinemodel;
+    private static Timer playerTimer;
+    private List<Players> playerList;
+
+    @FXML
+    public TableView<Players> availablePlayersView;
+
+    //@FXML
+    //public TableView<Players, String> name;
 
     @FXML
     protected void setScene(String path) {
@@ -27,7 +32,14 @@ public class OnlineController extends Online implements Initializable {
 
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Connection.getPlayerlist();
 
+        playerTimer = new Timer();
+        playerTimer.scheduleAtFixedRate(new TimerTask() {
+             public void run() {
+                Connection.getPlayerlist();
+            }
+        }, 5000, 5000);
     }
     @FXML
     protected void handleMainMenuButton(ActionEvent event){
@@ -43,13 +55,35 @@ public class OnlineController extends Online implements Initializable {
     /*
     Method to display all online players.
      */
-    public void displayPlayerList(){
-        Connection.getPlayerlist();
+    public void challengersView(){
+
+
     }
 
-    public void displayGameList(){
-        Connection.getGamelist();
+
+    public void availablePlayersView(List<String> list){
+
+        Players players;
+        Set<Integer> indexes = new HashSet<>();
+
+        for(String player : list){
+
+            players = new Players();
+            int indexPlayer = playerList.indexOf(players);
+            if(!player.equals("AiGroep7")){
+                if(indexPlayer == -1){
+                    System.out.println(player);
+                    playerList.add(new Players(player));
+
+                } else{
+                    indexes.add(indexPlayer);
+                }
+            }
+
+        }
     }
+
+
 
     public void logoutMenuButton(){
         Connection.logout();

@@ -2,15 +2,22 @@ package root.server;
 
 import root.server.Connection;
 import java.util.Arrays;
+import java.util.List;
 
 public class Interpreter {
     private String GAMETYPE;
     private String PLAYERTOMOVE;
     private String OPPONENT;
+    private List<String> playerList;
+    private List<String> gameList;
 
     /*
         Note: zie protocol.txt op blackboard om de input te zien van de server
      */
+    public Interpreter(){
+
+
+    }
 
     public void inputInterpreter(String inputCommand){
          inputCommand = inputCommand.replace("{", "")
@@ -21,6 +28,7 @@ public class Interpreter {
         String[] commands = inputCommand.split(" ");
         System.out.println("Volgende line is van inputInterpreter:");
         System.out.println(Arrays.toString(commands));
+
         //Switch case voor de mogelijke commands
         switch (commands[0]){
             case "OK":
@@ -32,14 +40,13 @@ public class Interpreter {
             case "SVR":
                 System.out.println("Test SVR");
                 switch (commands[1]) {
-
                     case "GAMELIST":
                         System.out.println("Gamelist of games");
-                        Connection.getGamelist();
                         break;
                     case "PLAYERLIST":
                         System.out.println("Playerlist of all players");
-                        Connection.getPlayerlist();
+                        //playerList = Connection.getPlayerlist();
+                        //System.out.println(playerList);
                         break;
                     case "HELP":
                         break;

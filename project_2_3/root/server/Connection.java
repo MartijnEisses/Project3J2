@@ -19,11 +19,8 @@ public class Connection {
     static Socket socket;
     static PrintWriter writer;
     private static BlockingQueue<String> commandQueue;
-   // private Thread thread;
-    //private Conversation conversation;
-  //  private ReadLines readLines;
-    //private PrintWriter out;
-    //private BufferedReader in;
+    private static List<String> playerList;
+    private static List<String> challenges;
     //PrintWriter is voor output
     //BufferedReader is voor input
 
@@ -63,12 +60,14 @@ public class Connection {
         commandQueue.add("logout");
     }
 
-    public static void getPlayerlist() {
+    public static List<String> getPlayerlist() {
         commandQueue.add("get playerlist");
+        return playerList;
     }
 
     public static void getGamelist() {
         commandQueue.add("get gamelist");
+
     }
 
     public static void acceptGameChallenge(int gameID) {

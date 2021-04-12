@@ -29,7 +29,7 @@
 
     <HBox minWidth="20" GridPane.columnIndex="1"></HBox>
 
-    <Label styleClass="playerListLabel" text="Incoming Challengers:" GridPane.columnIndex="2" GridPane.rowIndex="0"> </Label>
+    <Label styleClass="playerListLabel" text="Incoming Challenges:" GridPane.columnIndex="2" GridPane.rowIndex="0"> </Label>
     <HBox minWidth="20" GridPane.columnIndex="2" GridPane.rowIndex="1">
         <TableView fx:id="challengersView" GridPane.columnIndex="2" GridPane.rowIndex="1">
             <columns>
