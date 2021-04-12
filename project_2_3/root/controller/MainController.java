@@ -6,9 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
 import root.Main;
-import root.model.Board;
-import root.model.Reversi;
-import root.model.TicTacToe;
+
 
 import java.net.URL;
 import java.util.ResourceBundle;
