@@ -58,6 +58,28 @@ public class Board {
             System.out.print("\n");
         }
     }
+    public boolean fullBoard() {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[1].length; j++) {
+                if(board[i][j] == 0){return false;}
+            }
+
+        }
+        return true;
+    }
+    public boolean winner() {
+        int w = 0;
+        int z = 0;
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[1].length; j++) {
+                if(board[i][j] == 1){z++;}
+                else{w++;}
+            }
+
+        }
+        if(z > w){return true;}
+        else{return false;}
+    }
 
 
 }
