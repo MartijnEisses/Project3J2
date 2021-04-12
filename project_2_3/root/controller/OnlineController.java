@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.*;
 
 import root.server.Connection;
+import root.server.Interpreter;
 
 
 public class OnlineController extends Online implements Initializable {
@@ -50,6 +51,12 @@ public class OnlineController extends Online implements Initializable {
     protected void subscribeMenuButton(ActionEvent event){
         //System.out.println("Subscribe to Reversi is pressed!");
         Connection.subscribe("Reversi");
+    }
+
+    @FXML
+    protected void acceptChallengeButton(ActionEvent event){
+        System.out.println("accept is pressed!");
+        Connection.acceptGameChallenge(Interpreter.getGameID());
     }
 
     /*

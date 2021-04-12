@@ -14,15 +14,41 @@
 <?import javafx.scene.layout.*?>
 
 
+
 <?import java.net.URL?>
-<GridPane fx:id="gridBoard" fx:controller="root.controller.OnlineController" xmlns:fx="http://javafx.com/fxml" styleClass="boardBackground" alignment="center" gridLinesVisible="true">
+<GridPane fx:id="gridBoard" fx:controller="root.controller.OnlineController" xmlns:fx="http://javafx.com/fxml" styleClass="background" alignment="center" gridLinesVisible="false">
 
-    <Label styleClass="playerListLabel" text="Player list:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <Label styleClass="playerListLabel" text="Available players:" GridPane.columnIndex="0" GridPane.rowIndex="0"> </Label>
+    <HBox minWidth="20" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <TableView fx:id="availablePlayersView" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <columns>
+                <TableColumn fx:id="availablePlayers" prefWidth="300" text="Available Players" />
+            </columns>
+        </TableView>
+    </HBox>
 
-    <Button fx:id="mainButton" styleClass="mainButton" text="Main Menu" onAction="#handleMainMenuButton"  GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <HBox minWidth="20" GridPane.columnIndex="1"></HBox>
+
+    <Label styleClass="playerListLabel" text="Incoming Challenges:" GridPane.columnIndex="2" GridPane.rowIndex="0"> </Label>
+    <HBox minWidth="20" GridPane.columnIndex="2" GridPane.rowIndex="1">
+        <TableView fx:id="challengersView" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <columns>
+                <TableColumn fx:id="challengers" prefWidth="300" text="Challengers" />
+            </columns>
+        </TableView>
+    </HBox>
+
+    <HBox GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-padding: 5px;">
+        <Button fx:id="subscribeReversi" styleClass="subscribeReversi" text="Subscribe to Reversi" onAction="#subscribeMenuButton"/>
+    </HBox>
+    <HBox GridPane.columnIndex="2" GridPane.rowIndex="2" style="-fx-padding: 5px;">
+        <Button fx:id="acceptChallenge" styleClass="subscribeReversi" text="Accept Challenge" onAction="#acceptChallengeButton"/>
+    </HBox>
+
+    <Button fx:id="logout" styleClass="subscribeReversi" text="Logout" onAction="#logoutMenuButton"  GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+
 
     <stylesheets>
         <URL value="@Style.css" />
     </stylesheets>
-
 </GridPane>

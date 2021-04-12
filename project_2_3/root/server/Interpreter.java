@@ -10,6 +10,7 @@ public class Interpreter {
     private String OPPONENT;
     private List<String> playerList;
     private List<String> gameList;
+    private static int gameID;
 
     /*
         Note: zie protocol.txt op blackboard om de input te zien van de server
@@ -84,10 +85,10 @@ public class Interpreter {
                                     case "CHALLENGER:":
                                         //stuur challenge accept terug.
                                         //System.out.println("Send instant challenge back start");
-                                        int gameID = Integer.parseInt(commands[6]);
+                                        gameID = Integer.parseInt(commands[6]);
                                         System.out.println("Challenged by " + commands[4] + " for game: " + commands[8] + " gameID :" + commands[6]);
                                         System.out.println("Sending challenge accept back!");
-                                        Connection.acceptGameChallenge(gameID);
+//                                        Connection.acceptGameChallenge(gameID);
                                         break;
                                     case "CANCELLED":
                                         //challenge is door de uitdager gecanceld
@@ -110,5 +111,9 @@ public class Interpreter {
                 }
                 break;
         }
+    }
+
+    public static int getGameID() {
+        return gameID;
     }
 }

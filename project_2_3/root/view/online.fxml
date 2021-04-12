@@ -41,6 +41,9 @@
     <HBox GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-padding: 5px;">
         <Button fx:id="subscribeReversi" styleClass="subscribeReversi" text="Subscribe to Reversi" onAction="#subscribeMenuButton"/>
     </HBox>
+    <HBox GridPane.columnIndex="2" GridPane.rowIndex="2" style="-fx-padding: 5px;">
+        <Button fx:id="acceptChallenge" styleClass="subscribeReversi" text="Accept Challenge" onAction="#acceptChallengeButton"/>
+    </HBox>
 
     <Button fx:id="logout" styleClass="subscribeReversi" text="Logout" onAction="#logoutMenuButton"  GridPane.columnIndex="3" GridPane.rowIndex="3"/>
 
