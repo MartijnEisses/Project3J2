@@ -14,10 +14,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+    private GameType gameType;
 
     public enum Games{
         TicTacToe,
         Reversi
+    }
+
+    public enum GameType{
+        Local,
+        Online
     }
 
     @FXML
@@ -37,6 +43,7 @@ public class MainController implements Initializable {
     @FXML
     protected void handleSubmitButtonAction(ActionEvent event) {
         selectedGame = getSelectedGame();
+        setGameType(GameType.Local);
         switch(getSelectedGame()) {
             case TicTacToe:
                 setScene("view/TicTacToeBoard.fxml");
@@ -49,6 +56,7 @@ public class MainController implements Initializable {
 
     @FXML
     protected void handleOnlineButtonAction(ActionEvent event){
+        setGameType(GameType.Online);
         setScene("view/config.fxml");
 
     }
@@ -56,6 +64,14 @@ public class MainController implements Initializable {
     public Games getSelectedGame(){
         Games r = Games.valueOf(selectGame.getSelectionModel().getSelectedItem());
         return r;
+    }
+
+    public GameType getGameType() {
+        return gameType;
+    }
+
+    public void setGameType(GameType type) {
+        gameType = type;
     }
 
 }

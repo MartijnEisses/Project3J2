@@ -6,7 +6,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import root.model.Game;
 import root.model.TicTacToe;
 import java.net.URL;
 import java.util.ResourceBundle;

@@ -6,7 +6,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.paint.Color;
-import root.model.Game;
 import root.model.Reversi;
 import java.net.URL;
 import java.util.ResourceBundle;
