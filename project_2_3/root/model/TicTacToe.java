@@ -19,7 +19,7 @@ public class TicTacToe extends Board {
     public int[][] boardPosition = { { 0, 1, 2 }, { 3, 4, 5 }, { 6, 7, 8 } };
     public int[][] oBoardPosition = { { 0, 0 }, { 0, 1 }, { 0, 2 }, { 1, 0 }, { 1, 1 }, { 1, 2 }, { 2, 0 }, { 2, 1 },
             { 2, 2 } };
-    private Map<Color, Integer> scores = new HashMap<Color, Integer>();
+    public Map<Color, Integer> scores = new HashMap<Color, Integer>();
 
     Board b;
     boolean endGame = false;
@@ -42,12 +42,13 @@ public class TicTacToe extends Board {
                 // is there an empty spot
                 if (board[i][j] == Color.EMPTY.ordinal()) {
                     board[i][j] = Color.BLACK.ordinal();
+                    turn++;
                     int score = Minimax(board, 0, false);
                     board[i][j] = Color.EMPTY.ordinal();
+                    turn--;
                     if (score > bestScore) {
                         bestScore = score;
-                        bestMove = boardPosition[j][i];
-                        System.out.println(i + "  " + j);
+                        bestMove = boardPosition[i][j];
                     }
                 }
             }
@@ -58,9 +59,10 @@ public class TicTacToe extends Board {
     private int Minimax(int[][] board, int depth, boolean isMaximizing) {
         Color winner = CheckForWin();
         if (winner != null) {
-            return scores.get(winner);
+            int x = scores.get(winner);
+            System.out.println(x);
+            return x;
         }
-
         if (isMaximizing) {
             int bestScore = Integer.MIN_VALUE;
             for (int i = 0; i < board.length; i++) {
@@ -68,7 +70,9 @@ public class TicTacToe extends Board {
                     // is there an empty spot
                     if (board[i][j] == Color.EMPTY.ordinal()) {
                         board[i][j] = Color.BLACK.ordinal();
+                        turn++;
                         int score = Minimax(board, depth + 1, false);
+                        turn--;
                         board[i][j] = Color.EMPTY.ordinal();
                         if (score > bestScore) {
                             bestScore = score;
@@ -76,23 +80,28 @@ public class TicTacToe extends Board {
                     }
                 }
             }
+
             return bestScore;
         } else {
             {
-                int bestScore = Integer.MAX_VALUE;
+                int lowestScore = Integer.MAX_VALUE;
                 for (int i = 0; i < board.length; i++) {
                     for (int j = 0; j < board.length; j++) { // is there an empty spot
                         if (board[i][j] == Color.EMPTY.ordinal()) {
                             board[i][j] = Color.WHITE.ordinal();
+                            turn++;
+
                             int score = Minimax(board, depth + 1, true);
+                            turn--;
+
                             board[i][j] = Color.EMPTY.ordinal();
-                            if (score < bestScore) {
-                                bestScore = score;
+                            if (score < lowestScore) {
+                                lowestScore = score;
                             }
                         }
                     }
                 }
-                return bestScore;
+                return lowestScore;
             }
         }
 
@@ -242,10 +251,11 @@ public class TicTacToe extends Board {
             return Color.WHITE;
         }
 
-        if (turn == 8) {
+        // a tie
+        if (turn == 9) {
             return Color.EMPTY;
         }
-        return null;
+        return null; // no win/loss/tie
     }
 
     public void Win(Color winner) {

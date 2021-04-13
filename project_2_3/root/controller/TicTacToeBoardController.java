@@ -42,39 +42,39 @@ public class TicTacToeBoardController extends TicTacToe implements Initializable
 
     public void setStoneOnBoard(int x, int y, int turn) {
 
-         if (isEmpty(x, y)) {
-        setStone(x, y, turn);
-        switch (turn % 2) {
-        case 1:
-            ImageView img_o = new ImageView(new Image("root/view/O.png"));
-            img_o.setFitHeight(140);
-            img_o.setFitWidth(140);
-            gridBoard.add(img_o, x, y);
-            Move(boardPosition[x][y], turn);
-            this.turn++;
-            int bestmove = BestMove();
-            setStoneOnBoard(oBoardPosition[bestmove][0], oBoardPosition[bestmove][1], this.turn);
-            break;
-        case 0:
-            ImageView img_x = new ImageView(new Image("root/view/X.png"));
-            img_x.setFitHeight(140);
-            img_x.setFitWidth(140);
-            gridBoard.add(img_x, x, y);
-            Move(boardPosition[x][y], turn);
-            this.turn++;
-            break;
-        }
-        // // 1st turn is always the player
-        // if (versusAI && turn % 2 == 0) {
-        // int bestmove = BestMove();
-        // this.turn++;
-        // setStoneOnBoard(oBoardPosition[bestmove][0], oBoardPosition[bestmove][1],
-        // this.turn);
-        // }
-        if (CheckForWin() != null) {
-            Win(CheckForWin());
-        }
+        if (isEmpty(x, y)) {
+            setStone(x, y, turn);
+            switch (turn % 2) {
+            case 1:
+                ImageView img_o = new ImageView(new Image("root/view/O.png"));
+                img_o.setFitHeight(140);
+                img_o.setFitWidth(140);
+                gridBoard.add(img_o, x, y);
+                Move(boardPosition[x][y], turn);
+                this.turn++;
+                int bestmove = BestMove();
+                setStoneOnBoard(oBoardPosition[bestmove][0], oBoardPosition[bestmove][1], this.turn);
+                break;
+            case 0:
+                ImageView img_x = new ImageView(new Image("root/view/X.png"));
+                img_x.setFitHeight(140);
+                img_x.setFitWidth(140);
+                gridBoard.add(img_x, x, y);
+                Move(boardPosition[x][y], turn);
+                this.turn++;
+                break;
+            }
+            // // 1st turn is always the player
+            // if (versusAI && turn % 2 == 0) {
+            // int bestmove = BestMove();
+            // this.turn++;
+            // setStoneOnBoard(oBoardPosition[bestmove][0], oBoardPosition[bestmove][1],
+            // this.turn);
+            // }
+            if (CheckForWin() != null) {
+                Win(CheckForWin());
+            }
 
-         }
+        }
     }
 }
