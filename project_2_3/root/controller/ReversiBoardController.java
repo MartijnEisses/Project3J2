@@ -8,6 +8,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.paint.Color;
 import root.model.ReversiAi;
 import root.model.Reversi;
+
+import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -131,7 +133,7 @@ public class ReversiBoardController extends Reversi implements Initializable {
             }
             oldBoard = getBoard();
 
-                    boardChange(ai.calculateRandomMove(legalMoves(getBoard(), this.turn), getBoard(), this.turn));
+                boardChange(ai.calculateRandomMove(legalMoves(getBoard(), this.turn), getBoard(), this.turn));
                 if(getBoard() == oldBoard){
 
                     if(this.turn == 1) { this.turn++;}

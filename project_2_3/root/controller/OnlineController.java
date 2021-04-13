@@ -61,12 +61,14 @@ public class OnlineController extends Online implements Initializable {
     }
 
     @FXML
-    protected void acceptChallengeButton(ActionEvent event){
+    protected void acceptChallengeButton(ActionEvent event) throws IOException {
         System.out.println("accept is pressed!");
         Connection.acceptGameChallenge(Interpreter.getGameID());
-        if(Interpreter.getGameChallenge()!=null) {
-            gameStart();
-        }
+       // if(Interpreter.getGameChallenge()!=null) {
+          //  handleChallengeButton(event);
+       // }
+        setScene("view/OnlineReversi.fxml");
+        ReversiGame = new OnlineReversiBoardController(PlayerType.REMOTE, PlayerType.AI, 2,1);
     }
 
     @FXML
@@ -98,17 +100,20 @@ public class OnlineController extends Online implements Initializable {
         System.out.println("Sending challenge to: " + opponent.getText());
         Connection.challengePlayer(opponent.getText() , " Reversi");
 
-        gameStart();
+        System.out.println("Gamestart whosTUrn ai");
+        ReversiGame = new OnlineReversiBoardController(PlayerType.REMOTE, PlayerType.AI, 2,1);
+        setScene("view/OnlineReversi.fxml");
+
 
     }
 
     /*
     Game begint en jij bent niet als eerste aan de beurt.
     Dus de kleur is wit.
-     */
+
     public void gameStart(){
-        String[] temp = Interpreter.getGameChallenge();
-        String whosTurn = temp[4];
+        String temp = Interpreter.getGameChallenge();
+        String whosTurn = temp;
         if(whosTurn.equals(opponent) ) {
             System.out.println("Gamestart whosTUrn opponent");
             ReversiGame = new OnlineReversiBoardController(PlayerType.REMOTE, PlayerType.AI,1,2);
@@ -120,12 +125,11 @@ public class OnlineController extends Online implements Initializable {
         }
 
     }
+*/
     /*
         Wanneer de server zegt dat het jou beurt is als de game begint.
         De kleur van de ai is dan zwart
      */
-
-
    // public void yourGameTurn(){
    //     ReversiGame = new OnlineReversiBoardController(PlayerType.AI, PlayerType.REMOTE, opponent.getText(), 1);
    // }

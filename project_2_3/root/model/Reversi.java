@@ -254,203 +254,193 @@ public class Reversi extends Board {
             nCurp = 2;
         }
         if (curBoard[x][y] == 0) {
+            try {
+                if (curBoard[x + 1][y] == nCurp) {
+                    checker1 = x + 1;
+
+                    while (curBoard[checker1][y] == nCurp) {
+                        // if (checker1 != -1 && checker1 != 8) {
+                        System.out.println("BEN");
+                        bard[checker1][y] = curp;
+                        checker1++;
+                        //}
+                    }
+
+                    if (curBoard[checker1][y] == curp) {
+                        bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
+                        System.out.println("BEN_F");
+                        change = true;
+                    }
+                    bard = Arrays.stream(bard2).map(int[]::clone).toArray(int[][]::new);
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+            }
+            try {
+                if (curBoard[x - 1][y] == nCurp) {
+                    checker1 = x - 1;
+                    while (curBoard[checker1][y] == nCurp) {
+                        System.out.println("BOV");
+                        bard[checker1][y] = curp;
+                        checker1--;
+                    }
+
+                    if (curBoard[checker1][y] == curp) {
+                        bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
+                        System.out.println("BOV_F");
+                        change = true;
+                    }
+
+                }
+            }catch(ArrayIndexOutOfBoundsException e){}
+                bard = Arrays.stream(bard2).map(int[]::clone).toArray(int[][]::new);
                 try {
-                    if (curBoard[x + 1][y] == nCurp) {
-                        checker1 = x + 1;
-                        if (checker1 != 8) {
-                            while (curBoard[checker1][y] == nCurp) {
-                                // if (checker1 != -1 && checker1 != 8) {
-                                System.out.println("BEN");
-                                bard[checker1][y] = curp;
-                                checker1++;
-                                //}
-                            }
+                    if (curBoard[x][y + 1] == nCurp) {
+                        checker2 = y + 1;
+
+                        while (curBoard[x][checker2] == nCurp) {
+                            System.out.println("RE");
+
+                            bard[x][checker2] = curp;
+                            checker2++;
                         }
-                        if (curBoard[checker1][y] == curp) {
+
+                        // }
+                        if (curBoard[x][checker2] == curp) {
                             bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
-                            System.out.println("BEN_F");
                             change = true;
+                            System.out.println("RE_F");
                         }
-                        bard = Arrays.stream(bard2).map(int[]::clone).toArray(int[][]::new);
                     }
+
+                    bard = Arrays.stream(bard2).map(int[]::clone).toArray(int[][]::new);
                 } catch (ArrayIndexOutOfBoundsException e) {
                 }
                 try {
-                        if (curBoard[x - 1][y] == nCurp) {
-                            checker1 = x - 1;
-                                while (curBoard[checker1][y] == nCurp) {
-                                    System.out.println("BOV");
-                                    bard[checker1][y] = curp;
-                                    checker1--;
-                                }
 
-                                if (curBoard[checker1][y] == curp) {
-                                    bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
-                                    System.out.println("BOV_F");
-                                    change = true;
-                                }
+                    if (curBoard[x][y - 1] == nCurp) {
+                        checker2 = y - 1;
+
+                        while (curBoard[x][checker2] == nCurp) {
+                            // if (checker2 != 8 && checker2 != -1) {
+                            System.out.println("LI");
+                            bard[x][checker2] = curp;
+                            checker2--;
+                        }
+                        // }
+                        if (curBoard[x][checker2] == curp) {
+                            bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
+                            change = true;
+                            System.out.println("LI_F");
 
                         }
 
-                    bard = Arrays.stream(bard2).map(int[]::clone).toArray(int[][]::new);
-                    if (y + 1 != 8) {
-                        if (curBoard[x][y + 1] == nCurp) {
-                            checker2 = y + 1;
-                            if (checker2 != 8 && checker2 != -1) {
-                                while (curBoard[x][checker2] == nCurp) {
-                                    System.out.println("RE");
-                                    //if (checker2 != 8 && checker2 != -1) {
-                   /* System.out.println("     0 1 2 3 4 5 6 7");
-                    for(int i =0; i< 8; i++){
-
-                        System.out.print("  " + (i) + "  ");
-                        for(int p = 0; p< 8; p++){
-                            System.out.print(bard[i][p]);
-                        }
-                        System.out.println();
-                    }*/
-                                    bard[x][checker2] = curp;
-                                    checker2++;
-                                }
-                            }
-                            // }
-                            if (curBoard[x][checker2] == curp) {
-                                bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
-                                change = true;
-                                System.out.println("RE_F");
-                            }
-                        }
                     }
                     bard = Arrays.stream(bard2).map(int[]::clone).toArray(int[][]::new);
                 } catch (ArrayIndexOutOfBoundsException e) {
                 }
                 try {
-                    if (y - 1 != -1) {
-                        if (curBoard[x][y - 1] == nCurp) {
-                            checker2 = y - 1;
-                            if (checker2 != 8 && checker2 != -1) {
-                                while (curBoard[x][checker2] == nCurp) {
-                                    // if (checker2 != 8 && checker2 != -1) {
-                                    System.out.println("LI");
-                                    bard[x][checker2] = curp;
-                                    checker2--;
-                                }
-                            }
-                            // }
-                            if (curBoard[x][checker2] == curp) {
-                                bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
-                                change = true;
-                                System.out.println("LI_F");
 
-                            }
+                    if (curBoard[x + 1][y + 1] == nCurp) {
+                        checker1 = x + 1;
+                        checker2 = y + 1;
+
+                        while (curBoard[checker1][checker2] == nCurp) {
+                            //  if (checker1 != -1 && checker1 != 8 && checker2 != -1 && checker2 != 8) {
+                            bard[checker1][checker2] = curp;
+                            System.out.println("SCH-BEN-REC");
+                            checker1++;
+                            checker2++;
+
+                        }
+
+                        // }
+                        if (curBoard[checker1][checker2] == curp) {
+                            bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
+                            change = true;
+                            System.out.println("SCH-BEN-REC_F");
+
                         }
                     }
+
                     bard = Arrays.stream(bard2).map(int[]::clone).toArray(int[][]::new);
                 } catch (ArrayIndexOutOfBoundsException e) {
                 }
                 try {
-                    if (x + 1 != 8 & y + 1 != 8) {
-                        if (curBoard[x + 1][y + 1] == nCurp) {
-                            checker1 = x + 1;
-                            checker2 = y + 1;
-                            if (x + 1 != 8 & y + 1 != 8) {
-                                while (curBoard[checker1][checker2] == nCurp) {
-                                    //  if (checker1 != -1 && checker1 != 8 && checker2 != -1 && checker2 != 8) {
-                                    bard[checker1][checker2] = curp;
-                                    System.out.println("SCH-BEN-REC");
-                                    checker1++;
-                                    checker2++;
 
-                                }
-                            }
-                            // }
-                            if (curBoard[checker1][checker2] == curp) {
-                                bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
-                                change = true;
-                                System.out.println("SCH-BEN-REC_F");
+                    if (curBoard[x - 1][y - 1] == nCurp) {
+                        checker1 = x - 1;
+                        checker2 = y - 1;
 
-                            }
+                        while (curBoard[checker1][checker2] == nCurp) {
+                            // if (checker1 != -1 && checker1 != 8 && checker2 != -1 && checker2 != 8) {
+                            System.out.println("SCH-BOV-LIN");
+                            bard[checker1][checker2] = curp;
+                            checker1--;
+                            checker2--;
+
+                        }
+                        // }
+
+                        if (curBoard[checker1][checker2] == curp) {
+                            bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
+                            change = true;
+                            System.out.println("SCH-BOV-LIN_f");
+
                         }
                     }
+
                     bard = Arrays.stream(bard2).map(int[]::clone).toArray(int[][]::new);
                 } catch (ArrayIndexOutOfBoundsException e) {
                 }
                 try {
-                    if (x - 1 != -1 && y - 1 != -1) {
-                        if (curBoard[x - 1][y - 1] == nCurp) {
-                            checker1 = x - 1;
-                            checker2 = y - 1;
-                            if (checker1 != -1 && checker2 != -1) {
-                                while (curBoard[checker1][checker2] == nCurp) {
-                                    // if (checker1 != -1 && checker1 != 8 && checker2 != -1 && checker2 != 8) {
-                                    System.out.println("SCH-BOV-LIN");
-                                    bard[checker1][checker2] = curp;
-                                    checker1--;
-                                    checker2--;
 
-                                }
-                                // }
-                            }
-                            if (curBoard[checker1][checker2] == curp) {
-                                bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
-                                change = true;
-                                System.out.println("SCH-BOV-LIN_f");
+                    if (curBoard[x + 1][y - 1] == nCurp) {
+                        checker1 = x + 1;
+                        checker2 = y - 1;
 
-                            }
+                        while (curBoard[checker1][checker2] == nCurp) {
+                            // if (checker1 != -1 && checker1 != 8 && checker2 != -1 && checker2 != 8) {
+                            System.out.println("SCH-BOV-REC");
+                            bard[checker1][checker2] = curp;
+                            checker1++;
+                            checker2--;
+
+                        }
+                        // }
+
+                        if (curBoard[checker1][checker2] == curp) {
+                            bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
+                            change = true;
+                            System.out.println("SCH-BOV-REC_F");
                         }
                     }
+
                     bard = Arrays.stream(bard2).map(int[]::clone).toArray(int[][]::new);
                 } catch (ArrayIndexOutOfBoundsException e) {
                 }
                 try {
-                    if (x + 1 != 8 && y - 1 != -1) {
-                        if (curBoard[x + 1][y - 1] == nCurp) {
-                            checker1 = x + 1;
-                            checker2 = y - 1;
-                            if (checker1 != 8 && checker2 != -1) {
-                                while (curBoard[checker1][checker2] == nCurp) {
-                                    // if (checker1 != -1 && checker1 != 8 && checker2 != -1 && checker2 != 8) {
-                                    System.out.println("SCH-BOV-REC");
-                                    bard[checker1][checker2] = curp;
-                                    checker1++;
-                                    checker2--;
 
-                                }
-                                // }
-                            }
-                            if (curBoard[checker1][checker2] == curp) {
-                                bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
-                                change = true;
-                                System.out.println("SCH-BOV-REC_F");
-                            }
+                    if (curBoard[x - 1][y + 1] == nCurp) {
+                        checker1 = x - 1;
+                        checker2 = y + 1;
+
+                        while (curBoard[checker1][checker2] == nCurp) {
+                            //  if (checker1 != -1 && checker1 != 8 && checker2 != -1 && checker2 != 8) {
+                            System.out.println("SCH-BOV-LIN");
+                            bard[checker1][checker2] = curp;
+                            checker1--;
+                            checker2++;
+
+                        }
+
+                        if (curBoard[checker1][checker2] == curp) {
+                            bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
+                            change = true;
+                            System.out.println("SCH-BOV-LIN_F");
+
                         }
                     }
-                    bard = Arrays.stream(bard2).map(int[]::clone).toArray(int[][]::new);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                }
-                try {
-                    if (x - 1 != -1 && y + 1 != 8) {
-                        if (curBoard[x - 1][y + 1] == nCurp) {
-                            checker1 = x - 1;
-                            checker2 = y + 1;
-                            if (checker1 != -1 && checker2 != 8) {
-                                while (curBoard[checker1][checker2] == nCurp) {
-                                    //  if (checker1 != -1 && checker1 != 8 && checker2 != -1 && checker2 != 8) {
-                                    System.out.println("SCH-BOV-LIN");
-                                    bard[checker1][checker2] = curp;
-                                    checker1--;
-                                    checker2++;
 
-                                }
-                            }
-                            if (curBoard[checker1][checker2] == curp) {
-                                bard2 = Arrays.stream(bard).map(int[]::clone).toArray(int[][]::new);
-                                change = true;
-                                System.out.println("SCH-BOV-LIN_F");
-
-                            }
-                        }
-                    }
                 } catch (ArrayIndexOutOfBoundsException e) {
                 }
                 if (change == true) {
@@ -458,19 +448,18 @@ public class Reversi extends Board {
                     return bard2;
                 }
 
-
-            System.out.println("Move is not valid Do MOVE TEST");
-            //for (int i = 0; i < curBoard.length; i++) {
-            //    for (int j = 0; j < curBoard[1].length; j++) {
-            //        System.out.print(curBoard[i][j]);
-            //    }
-             //   System.out.print("\n");
-           //}
-            //System.out.println(x+"x+y"+y);
-           // System.out.println(cp);
-           // System.out.println(legalMoves(curBoard, cp));
-            return curBoard;
-        }
-        return  curBoard;
+                System.out.println("Move is not valid Do MOVE TEST");
+                //for (int i = 0; i < curBoard.length; i++) {
+                //    for (int j = 0; j < curBoard[1].length; j++) {
+                //        System.out.print(curBoard[i][j]);
+                //    }
+                //   System.out.print("\n");
+                //}
+                //System.out.println(x+"x+y"+y);
+                // System.out.println(cp);
+                // System.out.println(legalMoves(curBoard, cp));
+                return curBoard;
+              }
+                return curBoard;
+            }
     }
-}

@@ -22,7 +22,7 @@ public class Interpreter {
     private static List<String> legalmovesAI;
     private Board tempBoard;
     private OnlineReversiBoardController online;
-    private static String[] gameChallenge;
+    private static String gameChallenge;
     /*
         Note: zie protocol.txt op blackboard om de input te zien van de server
      */
@@ -81,21 +81,25 @@ public class Interpreter {
                                 PLAYERTOMOVE = commands[4];
                                 OPPONENT = commands[8];
                                 //System.out.println(PLAYERTOMOVE + GAMETYPE + OPPONENT);
-
                                 break;
-
+                                    case"PLAYERTOMOVE:":
+                                        //System.out.println("start van PLAYER TO MOVE TEST");
+                                        gameChallenge = commands[4];
+                                        System.out.println("Player to move = " + gameChallenge);
+                                break;
 
                             case "MOVE":
                                 //reageer op de string move van de opponent.
                                 int zet = Integer.parseInt(commands[6]);
                                 int[] position = new int[2];
+                                System.out.println(commands[6]);
                                 if (commands[4].equals(OPPONENT)) {
                                     System.out.println("Received move from opponent");
                                     System.out.println("Opponent made move on: " + zet);
                                 } else {
                                     System.out.println("Received move from ai");
                                     System.out.println("ai made move on: " + zet);
-                                    online.convertToBoardPosition(zet);
+                                    //online.convertToBoardPosition(zet);
                                 }
                                 break;
 
@@ -129,6 +133,7 @@ public class Interpreter {
                                 break;
                             case "LOSS":
                                 //info over loss.
+
                                 //alle stenen moeten worden gereset.
                                 //Display that user has lost. Terug naar online screen en display user has lost
                                 break;
@@ -147,7 +152,7 @@ public class Interpreter {
         return playerList;
     }
 
-    public static String[] getGameChallenge() {
+    public static String getGameChallenge() {
         return gameChallenge;
     }
 }

@@ -6,11 +6,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import root.Main;
 import root.model.Reversi;
 import root.model.ReversiAi;
 
+import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.HashMap;
 
 public class OnlineReversiBoardController extends Reversi implements Initializable {
 
@@ -23,12 +26,9 @@ public class OnlineReversiBoardController extends Reversi implements Initializab
     private String Opponent;
     private int colorBlack;
     private int colorWhite;
+    private HashMap<PlayerType, Integer> players = new HashMap<PlayerType, Integer>();
 
-
-
-
-
-    public OnlineReversiBoardController(PlayerType player1, PlayerType player2,int colorBlack, int colorWhite){
+    public OnlineReversiBoardController(PlayerType player1, PlayerType player2, int colorBlack, int colorWhite){
         this.player1 = player1;
         this.player2 = player2;
         this.colorBlack = colorBlack;
@@ -51,6 +51,15 @@ public class OnlineReversiBoardController extends Reversi implements Initializab
         setStone(4,3,2);
         setStone(3,3,1);
         drawBoard();
+    }
+    @FXML
+    protected void setScene(String path) {
+        Main.setScene(path);
+    }
+
+    @FXML
+    protected void handleConfigAction(ActionEvent event){
+        setScene("view/online.fxml");
     }
 
     public int[] convertToBoardPosition(int p){
@@ -172,5 +181,9 @@ public class OnlineReversiBoardController extends Reversi implements Initializab
 
         //setStoneOnBoard(100,100,this.turn);
        // }
+    }
+
+    public void handleConfigAction(javafx.event.ActionEvent event) {
+        setScene("view/online.fxml");
     }
 }

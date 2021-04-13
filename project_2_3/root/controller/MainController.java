@@ -50,15 +50,10 @@ public class MainController implements Initializable {
         setScene("view/config.fxml");
 
     }
-
-
-
     public GameType getGameType(){
         GameType game  = GameType.valueOf(selectGame.getSelectionModel().getSelectedItem());
         return game;
     }
-
-
 
     public PlayerType getPlayerType() {
         return playerType;
