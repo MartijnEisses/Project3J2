@@ -40,10 +40,10 @@ public class TicTacToe extends Board {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
                 // is there an empty spot
-                if (board[j][i] == Color.EMPTY.ordinal()) {
-                    board[j][i] = Color.BLACK.ordinal();
+                if (board[i][j] == Color.EMPTY.ordinal()) {
+                    board[i][j] = Color.BLACK.ordinal();
                     int score = Minimax(board, 0, false);
-                    board[j][i] = Color.EMPTY.ordinal();
+                    board[i][j] = Color.EMPTY.ordinal();
                     if (score > bestScore) {
                         bestScore = score;
                         bestMove = boardPosition[j][i];
@@ -66,10 +66,10 @@ public class TicTacToe extends Board {
             for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board.length; j++) {
                     // is there an empty spot
-                    if (board[j][i] == Color.EMPTY.ordinal()) {
-                        board[j][i] = Color.BLACK.ordinal();
+                    if (board[i][j] == Color.EMPTY.ordinal()) {
+                        board[i][j] = Color.BLACK.ordinal();
                         int score = Minimax(board, depth + 1, false);
-                        board[j][i] = Color.EMPTY.ordinal();
+                        board[i][j] = Color.EMPTY.ordinal();
                         if (score > bestScore) {
                             bestScore = score;
                         }
@@ -82,10 +82,10 @@ public class TicTacToe extends Board {
                 int bestScore = Integer.MAX_VALUE;
                 for (int i = 0; i < board.length; i++) {
                     for (int j = 0; j < board.length; j++) { // is there an empty spot
-                        if (board[j][i] == Color.EMPTY.ordinal()) {
-                            board[j][i] = Color.WHITE.ordinal();
+                        if (board[i][j] == Color.EMPTY.ordinal()) {
+                            board[i][j] = Color.WHITE.ordinal();
                             int score = Minimax(board, depth + 1, true);
-                            board[j][i] = Color.EMPTY.ordinal();
+                            board[i][j] = Color.EMPTY.ordinal();
                             if (score < bestScore) {
                                 bestScore = score;
                             }
