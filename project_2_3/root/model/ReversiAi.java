@@ -7,7 +7,6 @@ public class ReversiAi extends Reversi{
     private Boolean[][] geldigeZetten;
     private String id;
 
-
     final double CORNERPLACE = 10;
     final double EDGEPLACE = 5;
     final double PLACENEXTCORNER = -10;

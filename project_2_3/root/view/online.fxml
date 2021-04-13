@@ -16,39 +16,98 @@
 
 
 <?import java.net.URL?>
+<?import javafx.scene.text.Font?>
 <GridPane fx:id="gridBoard" fx:controller="root.controller.OnlineController" xmlns:fx="http://javafx.com/fxml" styleClass="background" alignment="center" gridLinesVisible="false">
+    <Label text="Challenge Player:" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" GridPane.rowSpan="1" GridPane.halignment="CENTER" >
+    <font>
+        <Font name="Arial" size="24" ></Font>
+    </font>
+    <GridPane.margin>
+        <Insets top="20" right="0" bottom="20" left="0"></Insets>
+    </GridPane.margin>
+</Label>
 
-    <Label styleClass="playerListLabel" text="Available players:" GridPane.columnIndex="0" GridPane.rowIndex="0"> </Label>
-    <HBox minWidth="20" GridPane.columnIndex="0" GridPane.rowIndex="1">
-        <TableView fx:id="availablePlayersView" GridPane.columnIndex="0" GridPane.rowIndex="1">
-            <columns>
-                <TableColumn fx:id="availablePlayers" prefWidth="300" text="Available Players" />
-            </columns>
-        </TableView>
-    </HBox>
+<Label text="IGN" GridPane.columnIndex="0" GridPane.rowIndex="1" >
+</Label>
+    <TextField fx:id="opponent" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-    <HBox minWidth="20" GridPane.columnIndex="1"></HBox>
+    <Button styleClass="subscribeReversi" fx:id="challengeButton" text="Challenge!"
+            prefWidth="100" prefHeight="40" defaultButton="true"
+            GridPane.columnIndex="0" GridPane.rowIndex="5"
+            GridPane.columnSpan="2" GridPane.rowSpan="1"
+            GridPane.halignment="RIGHT"
+            onAction="#handleChallengeButton">
+        <GridPane.margin>
+            <Insets top="20" right="0" bottom="20" left="0"></Insets>
+        </GridPane.margin>
+    </Button>
 
-    <Label styleClass="playerListLabel" text="Incoming Challenges:" GridPane.columnIndex="2" GridPane.rowIndex="0"> </Label>
-    <HBox minWidth="20" GridPane.columnIndex="2" GridPane.rowIndex="1">
-        <TableView fx:id="challengersView" GridPane.columnIndex="2" GridPane.rowIndex="1">
-            <columns>
-                <TableColumn fx:id="challengers" prefWidth="300" text="Challengers" />
-            </columns>
-        </TableView>
-    </HBox>
+    <Button styleClass="reversiGameButton" fx:id="reversiGameButton" text="Reversi"
+            prefWidth="100" prefHeight="40" defaultButton="true"
+            GridPane.columnIndex="3" GridPane.rowIndex="4"
+            GridPane.columnSpan="2" GridPane.rowSpan="1"
+            GridPane.halignment="RIGHT"
+            onAction="#handleReversiGameButton">
+        <GridPane.margin>
+            <Insets top="20" right="0" bottom="20" left="0"></Insets>
+        </GridPane.margin>
+    </Button>
 
-    <HBox GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-padding: 5px;">
-        <Button fx:id="subscribeReversi" styleClass="subscribeReversi" text="Subscribe to Reversi" onAction="#subscribeMenuButton"/>
-    </HBox>
-    <HBox GridPane.columnIndex="2" GridPane.rowIndex="2" style="-fx-padding: 5px;">
-        <Button fx:id="acceptChallenge" styleClass="subscribeReversi" text="Accept Challenge" onAction="#acceptChallengeButton"/>
-    </HBox>
+    <Button styleClass="TictactoeGameButton" fx:id="Tictactoe" text="Tic Tac Toe"
+            prefWidth="100" prefHeight="40" defaultButton="true"
+            GridPane.columnIndex="0" GridPane.rowIndex="4"
+            GridPane.columnSpan="2" GridPane.rowSpan="1"
+            GridPane.halignment="RIGHT"
+            onAction="#handleTictactoeGameButton">
+        <GridPane.margin>
+            <Insets top="20" right="0" bottom="20" left="0"></Insets>
+        </GridPane.margin>
+    </Button>
 
-    <Button fx:id="logout" styleClass="subscribeReversi" text="Logout" onAction="#logoutMenuButton"  GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+    <Button styleClass="subscribeReversi" fx:id="acceptChallenge" text="Accept Challenge"
+            prefWidth="100" prefHeight="40" defaultButton="true"
+            GridPane.columnIndex="3" GridPane.rowIndex="5"
+            GridPane.columnSpan="2" GridPane.rowSpan="1"
+            GridPane.halignment="RIGHT"
+            onAction="#acceptChallengeButton">
+        <GridPane.margin>
+            <Insets top="20" right="0" bottom="20" left="0"></Insets>
+        </GridPane.margin>
 
 
-    <stylesheets>
-        <URL value="@Style.css" />
-    </stylesheets>
-</GridPane>
+    </Button>
+    <!--
+     <Label styleClass="playerListLabel" text="Available players:" GridPane.columnIndex="0" GridPane.rowIndex="0"> </Label>
+     <HBox minWidth="20" GridPane.columnIndex="0" GridPane.rowIndex="1">
+         <TableView fx:id="availablePlayersView" GridPane.columnIndex="0" GridPane.rowIndex="1">
+             <columns>
+                 <TableColumn fx:id="availablePlayers" prefWidth="300" text="Available Players" />
+             </columns>
+         </TableView>
+     </HBox>
+
+     <HBox minWidth="20" GridPane.columnIndex="1"></HBox>
+
+     <Label styleClass="playerListLabel" text="Incoming Challenges:" GridPane.columnIndex="2" GridPane.rowIndex="0"> </Label>
+     <HBox minWidth="20" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <TableView fx:id="challengersView" GridPane.columnIndex="2" GridPane.rowIndex="1">
+             <columns>
+                 <TableColumn fx:id="challengers" prefWidth="300" text="Challengers" />
+             </columns>
+         </TableView>
+     </HBox>
+
+     <HBox GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-padding: 5px;">
+         <Button fx:id="subscribeReversi" styleClass="subscribeReversi" text="Subscribe to Reversi" onAction="#subscribeMenuButton"/>
+     </HBox>
+     <HBox GridPane.columnIndex="2" GridPane.rowIndex="2" style="-fx-padding: 5px;">
+         <Button fx:id="acceptChallenge" styleClass="subscribeReversi" text="Accept Challenge" onAction="#acceptChallengeButton"/>
+     </HBox>
+
+     <Button fx:id="logout" styleClass="subscribeReversi" text="Logout" onAction="#logoutMenuButton"  GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+
+
+     <stylesheets>
+         <URL value="@Style.css" />
+     </stylesheets>-->
+ </GridPane>

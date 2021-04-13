@@ -36,7 +36,7 @@ public class Board {
 
     public void setStone(int x, int y, int value) {
         board[x][y] = value;
-        System.out.println("Move is legal on position " + x + "-"  +y + " for player " + value);
+        //System.out.println("Move is legal on position " + x + "-"  +y + " for player " + value);
     }
     public void boardChange(int[][] newBord) {
         board = newBord;
@@ -53,9 +53,9 @@ public class Board {
     public void drawBoard() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[1].length; j++) {
-                System.out.print(board[i][j]);
+                //System.out.print(board[i][j]);
             }
-            System.out.print("\n");
+            //System.out.print("\n");
         }
     }
     public boolean fullBoard() {

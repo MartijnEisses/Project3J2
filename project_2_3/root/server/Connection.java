@@ -77,8 +77,8 @@ public class Connection {
         popQueue();
     }
 
-    public void challengePlayer(String opponent, String gamemode) {
-        commandQueue.add("challenge " + opponent + gamemode);
+    public static void challengePlayer(String opponent, String gamemode) {
+        commandQueue.add("challenge \"" + opponent + "\" \"" + gamemode + "\"");
     }
 
     public static void subscribe(String game){
@@ -89,7 +89,7 @@ public class Connection {
         //printQueue();
     }
 
-    public void setMove(int position) {
+    public static void setMove(int position) {
         commandQueue.add("move " + position);
     }
 
@@ -168,7 +168,6 @@ public class Connection {
                 e.printStackTrace();
             }
         }
-
         //initiating the buffered Reader
         void buffReader() {
             try {

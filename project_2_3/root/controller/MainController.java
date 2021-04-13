@@ -12,26 +12,18 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+    private PlayerType playerType;
     private GameType gameType;
 
-    public enum Games{
-        TicTacToe,
-        Reversi
-    }
-
-    public enum GameType{
-        Local,
-        Online
-    }
 
     @FXML
     ComboBox<String> selectGame;
 
-    public static Games selectedGame;
+    public static GameType selectedGame;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         selectGame.getItems().addAll("TicTacToe", "Reversi");
-        selectGame.getSelectionModel().select(String.valueOf(Games.TicTacToe));
+        selectGame.getSelectionModel().select(String.valueOf(gameType.TicTacToe));
     }
 
     protected void setScene(String path) {
@@ -40,9 +32,9 @@ public class MainController implements Initializable {
 
     @FXML
     protected void handleSubmitButtonAction(ActionEvent event) {
-        selectedGame = getSelectedGame();
-        setGameType(GameType.Local);
-        switch(getSelectedGame()) {
+        selectedGame = getGameType();
+        setPlayerType(playerType.LOCAL);
+        switch(getGameType()) {
             case TicTacToe:
                 setScene("view/TicTacToeBoard.fxml");
                 break;
@@ -54,22 +46,25 @@ public class MainController implements Initializable {
 
     @FXML
     protected void handleOnlineButtonAction(ActionEvent event){
-        setGameType(GameType.Online);
+        setPlayerType(playerType.REMOTE);
         setScene("view/config.fxml");
 
     }
 
-    public Games getSelectedGame(){
-        Games r = Games.valueOf(selectGame.getSelectionModel().getSelectedItem());
-        return r;
+
+
+    public GameType getGameType(){
+        GameType game  = GameType.valueOf(selectGame.getSelectionModel().getSelectedItem());
+        return game;
     }
 
-    public GameType getGameType() {
-        return gameType;
+
+
+    public PlayerType getPlayerType() {
+        return playerType;
     }
 
-    public void setGameType(GameType type) {
-        gameType = type;
+    public void setPlayerType(PlayerType playerType) {
+        this.playerType = playerType;
     }
-
 }

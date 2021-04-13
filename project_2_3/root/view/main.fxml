@@ -23,7 +23,7 @@
 
     <Button fx:id="selectButton" styleClass="selectButton" text="Start Game" onAction="#handleSubmitButtonAction" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-    <Button fx:id="onlineButton" styleClass="onlineButton" text="Settings" onAction="#handleOnlineButtonAction"  GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+    <Button fx:id="onlineButton" styleClass="onlineButton" text="Online" onAction="#handleOnlineButtonAction"  GridPane.columnIndex="2" GridPane.rowIndex="1"/>
 
     <stylesheets>
         <URL value="@Style.css" />

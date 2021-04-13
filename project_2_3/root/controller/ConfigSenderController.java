@@ -74,6 +74,9 @@ public class ConfigSenderController implements Initializable {
 
     }
 
+    public TextField getIgnField() {
+        return ignField;
+    }
 }
 
 class AlertHelper {
