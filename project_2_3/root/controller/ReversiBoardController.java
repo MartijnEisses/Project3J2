@@ -6,6 +6,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.paint.Color;
+import root.model.ReversiAi;
 import root.model.Reversi;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,22 +15,16 @@ public class ReversiBoardController extends Reversi implements Initializable {
 
     @FXML
     GridPane gridBoard;
-    private Reversi reversi;
+    private ReversiAi ai;
     public static int turn = 1;
     int[][] oldBoard = getBoard();
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         createGridBoard(getBoard(), 75, 75);
-        setStoneOnBoardStart(3, 3, 1);
-        setStoneOnBoardStart(3, 4, 2);
-        setStoneOnBoardStart(4, 3, 2);
-        setStoneOnBoardStart(4, 4, 1);
-
-        // setStone(3,4,2);
-        // setStone(4,4,1);
-        // setStone(4,3,2);
-        // setStone(3,3,1);
-        // drawBoard();
+        setStoneOnBoardStart(3, 4, 1);
+        setStoneOnBoardStart(4, 3, 1);
+        setStoneOnBoardStart(4, 4, 2);
+        setStoneOnBoardStart(3, 3, 2);
     }
 
     public void createGridBoard(int[][] b, int i1, int i2) {
@@ -48,19 +43,14 @@ public class ReversiBoardController extends Reversi implements Initializable {
             }
         }
     }
-
     public void setStoneOnBoardStart(int x, int y, int turn) {
-        if (isEmpty(x, y)) {
             setStone(x, y, turn);
-            boardChange(doMove(getBoard(), turn, y, x));
-            drawBoard();
             switch (turn) {
             case 1:
                 Circle stone_1 = new Circle();
                 stone_1.setCenterX(100.0f);
                 stone_1.setCenterY(100.0f);
                 stone_1.setRadius(30.0f);
-                System.out.println("Setting stone on : " + x + " - " + y + " for: black");
                 gridBoard.add(stone_1, x, y);
                 this.turn = 2;
                 break;
@@ -70,68 +60,61 @@ public class ReversiBoardController extends Reversi implements Initializable {
                 stone_2.setCenterY(100.0f);
                 stone_2.setRadius(30.0f);
                 stone_2.setFill(Color.WHITE);
-                System.out.println("Setting stone on : " + x + " - " + y + " for: white");
                 gridBoard.add(stone_2, x, y);
                 this.turn = 1;
                 break;
             }
+    }
+    public void setStoneOnBoard(int x, int y, int turn) {
+            boardChange(doMove(getBoard(), turn, y, x));
+            updateBoard();
+        try {
+            aiSet();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
-
-    public void setStoneOnBoard(int x, int y, int turn) {
-        if (isEmpty(x, y)) {
-            // setStone(x, y, turn);
-            boardChange(doMove(getBoard(), turn, y, x));
+    public void updateBoard(){
             int[][] newBoard = getBoard();
             switch (turn) {
-            case 1:
-                for (int i = 0; i < newBoard.length; i++) {
-                    for (int j = 0; j < newBoard[1].length; j++) {
+                case 1:
+                    for (int i = 0; i < newBoard.length; i++) {
+                        for (int j = 0; j < newBoard[1].length; j++) {
 
-                        if (newBoard[i][j] != oldBoard[i][j]) {
-                            System.out.println(i + "-" + j);
-                            Circle stone_1 = new Circle();
-                            stone_1.setCenterX(100.0f);
-                            stone_1.setCenterY(100.0f);
-                            stone_1.setRadius(30.0f);
-                            System.out.println("Setting stone on : " + x + " - " + y + " for: black");
-                            gridBoard.add(stone_1, j, i);
-                            setStone(x, y, turn);
-                            this.turn = 2;
+                            if (newBoard[i][j] != oldBoard[i][j]) {
+                                Circle stone_1 = new Circle();
+                                stone_1.setCenterX(100.0f);
+                                stone_1.setCenterY(100.0f);
+                                stone_1.setRadius(30.0f);
+                                gridBoard.add(stone_1, j, i);
+                                this.turn = 2;
+                            }
                         }
                     }
-                }
-                break;
-            case 2:
-                for (int i = 0; i < newBoard.length; i++) {
-                    for (int j = 0; j < newBoard[1].length; j++) {
+                    break;
+                case 2:
+                    for (int i = 0; i < newBoard.length; i++) {
+                        for (int j = 0; j < newBoard[1].length; j++) {
 
-                        if (newBoard[i][j] != oldBoard[i][j]) {
-                            System.out.println(i + "-" + j);
-                            Circle stone_2 = new Circle();
-                            stone_2.setCenterX(100.0f);
-                            stone_2.setCenterY(100.0f);
-                            stone_2.setRadius(30.0f);
-                            stone_2.setFill(Color.WHITE);
-                            System.out.println("Setting stone on : " + x + " - " + y + " for: white");
-                            gridBoard.add(stone_2, j, i);
-                            this.turn = 1;
-                            drawBoard();
+                            if (newBoard[i][j] != oldBoard[i][j]) {
+                                Circle stone_2 = new Circle();
+                                stone_2.setCenterX(100.0f);
+                                stone_2.setCenterY(100.0f);
+                                stone_2.setRadius(30.0f);
+                                stone_2.setFill(Color.WHITE);
+                                gridBoard.add(stone_2, j, i);
+                                this.turn = 1;
+                            }
                         }
                     }
-                }
-                break;
+                    break;
             }
             oldBoard = getBoard();
-            drawBoard();
-        }
-    }
 
-    // public void opponentSet(int p){
-    // int x = convertToBoardPosition(p)[0];
-    // int y = convertToBoardPosition(p)[1];
-    //
-    // setStoneOnBoard(x, y, turn);
-    //
-    // }
+    }
+    public void aiSet() throws InterruptedException {
+        aiMove();
+        updateBoard();
+
+    }
 }
