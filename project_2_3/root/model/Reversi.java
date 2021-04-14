@@ -448,16 +448,16 @@ public class Reversi extends Board {
                     return bard2;
                 }
 
-                System.out.println("Move is not valid Do MOVE TEST");
-                //for (int i = 0; i < curBoard.length; i++) {
-                //    for (int j = 0; j < curBoard[1].length; j++) {
-                //        System.out.print(curBoard[i][j]);
-                //    }
-                //   System.out.print("\n");
-                //}
-                //System.out.println(x+"x+y"+y);
-                // System.out.println(cp);
-                // System.out.println(legalMoves(curBoard, cp));
+                System.out.println("Move is not valid DO MOVE METHOD<-----");
+                for (int i = 0; i < curBoard.length; i++) {
+                    for (int j = 0; j < curBoard[1].length; j++) {
+                        System.out.print(curBoard[i][j]);
+                    }
+                   System.out.print("\n");
+                }
+                System.out.println(x+"x+y"+y);
+                 System.out.println(cp);
+                 System.out.println(legalMoves(curBoard, cp));
                 return curBoard;
               }
                 return curBoard;

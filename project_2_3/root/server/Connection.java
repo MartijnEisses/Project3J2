@@ -26,12 +26,9 @@ public class Connection {
 
     public Connection() throws IOException {
         commandQueue = new LinkedBlockingQueue<>();
-       // out = new PrintWriter(socket.getOutputStream(), true);
-        //in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
 
     public void connectToServer(String ip, int port) {
-        //System.out.println("ConnectToServer Werkt begin");
         System.out.println("Logging into server: " + ip + " on port: " + port);
         try {
             socket = new Socket(ip, port);
@@ -138,7 +135,7 @@ public class Connection {
         }
 
         public static void sendStringToServer(PrintWriter writer, String command) {
-            //System.out.println("Sending command :" + command);
+
             writer.println(command);
             writer.flush();
         }

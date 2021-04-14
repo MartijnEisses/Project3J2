@@ -2,6 +2,7 @@ package root.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -23,9 +24,9 @@ public class OnlineController extends Online implements Initializable {
     private Online onlinemodel;
     private static Timer playerTimer;
     private List<String> playerList;
-    private OnlineReversiBoardController ReversiGame;
+    public OnlineReversiBoardController ReversiGame;
     private ConfigSenderController configSenderController;
-
+    private Interpreter interpreter;
 
     @FXML
     private TextField opponent;
@@ -37,7 +38,6 @@ public class OnlineController extends Online implements Initializable {
     protected void setScene(String path) {
         Main.setScene(path);
     }
-
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Connection.getPlayerlist();
@@ -66,9 +66,8 @@ public class OnlineController extends Online implements Initializable {
         Connection.acceptGameChallenge(Interpreter.getGameID());
        // if(Interpreter.getGameChallenge()!=null) {
           //  handleChallengeButton(event);
-       // }
+       //
         setScene("view/OnlineReversi.fxml");
-        ReversiGame = new OnlineReversiBoardController(PlayerType.REMOTE, PlayerType.AI, 2,1);
     }
 
     @FXML
@@ -101,8 +100,8 @@ public class OnlineController extends Online implements Initializable {
         Connection.challengePlayer(opponent.getText() , " Reversi");
 
         System.out.println("Gamestart whosTUrn ai");
-        ReversiGame = new OnlineReversiBoardController(PlayerType.REMOTE, PlayerType.AI, 2,1);
-        setScene("view/OnlineReversi.fxml");
+        //ReversiGame = new OnlineReversiBoardController();
+        //setScene("view/OnlineReversi.fxml");
 
 
     }

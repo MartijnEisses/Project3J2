@@ -13,5 +13,10 @@ public class GameController {
     }
 
 
+    public void yourTurn(){
+
+
+    }
+
 
 }

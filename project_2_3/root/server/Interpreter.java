@@ -1,16 +1,14 @@
 package root.server;
 
-import root.controller.GameType;
-import root.controller.OnlineController;
+import javafx.stage.Stage;
+import root.Main;
 import root.controller.OnlineReversiBoardController;
-import root.model.Reversi;
-import root.model.ReversiAi;
-import root.server.Connection;
 import root.model.Board;
+import root.model.ReversiAi;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 
 public class Interpreter {
     private String GAMETYPE;
@@ -22,7 +20,7 @@ public class Interpreter {
     private static List<String> legalmovesAI;
     private Board tempBoard;
     private OnlineReversiBoardController online;
-    private static String gameChallenge;
+    private  String gameChallenge;
     /*
         Note: zie protocol.txt op blackboard om de input te zien van de server
      */
@@ -30,6 +28,7 @@ public class Interpreter {
         playerList = new ArrayList<>();
         legalmovesAI = new ArrayList<>();
         online = new OnlineReversiBoardController();
+
     }
 
     public void inputInterpreter(String inputCommand) {
@@ -84,6 +83,12 @@ public class Interpreter {
                                 break;
                                     case"PLAYERTOMOVE:":
                                         //System.out.println("start van PLAYER TO MOVE TEST");
+                                        if(commands[4].equals(OPPONENT)){
+                                            online.setAi(2);
+                                            //primaryStage.
+                                        } else{
+                                           online.setAi(1);
+                                        }
                                         gameChallenge = commands[4];
                                         System.out.println("Player to move = " + gameChallenge);
                                 break;
@@ -96,16 +101,21 @@ public class Interpreter {
                                 if (commands[4].equals(OPPONENT)) {
                                     System.out.println("Received move from opponent");
                                     System.out.println("Opponent made move on: " + zet);
+
                                 } else {
                                     System.out.println("Received move from ai");
                                     System.out.println("ai made move on: " + zet);
-                                    //online.convertToBoardPosition(zet);
+                                    online.convertToBoardPosition(zet);
+                                    //online.setStoneOnBoard(position[0], position[1],2);
                                 }
                                 break;
 
                             case "YOURTURN":
                                 //ai moet weten dat het zijn beurt is.
                                 System.out.println("Its youre turn ai make a good move...");
+                                System.out.println();
+                                online.aiMove();
+
                                 break;
                             case "CHALLENGE":
 
@@ -128,20 +138,26 @@ public class Interpreter {
                                 break;
                             case "WIN":
                                 //info over win
+                                //online.setScene("view/online.fxml");
                                 //alle stenen moeten worden gereset.
                                 //Display that user has won.Terug naar online screen en display user has won.
                                 break;
                             case "LOSS":
                                 //info over loss.
-
+                               // online.setScene("view/online.fxml");
                                 //alle stenen moeten worden gereset.
                                 //Display that user has lost. Terug naar online screen en display user has lost
                                 break;
+                            default:
+                                throw new IllegalStateException("Unexpected value: " + commands[2]);
                         }
                         break;
                 }
                 break;
         }
+    }
+    public static void getReversi(){
+
     }
 
     public static int getGameID() {
@@ -152,7 +168,7 @@ public class Interpreter {
         return playerList;
     }
 
-    public static String getGameChallenge() {
+    public String getGameChallenge() {
         return gameChallenge;
     }
 }

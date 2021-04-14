@@ -13,7 +13,7 @@
 
 <?import java.net.URL?>
 <GridPane fx:id="gridBoard" fx:controller="root.controller.OnlineReversiBoardController" xmlns:fx="http://javafx.com/fxml" styleClass="boardBackground" alignment="center" gridLinesVisible="true">
-    <Button fx:id="onlineButton" styleClass="onlineButton" text="Online" onAction="#handleConfigAction"  GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
 
 
 

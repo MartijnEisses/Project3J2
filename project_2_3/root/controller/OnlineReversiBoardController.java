@@ -6,7 +6,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import root.Main;
 import root.model.Reversi;
 import root.model.ReversiAi;
 
@@ -19,6 +18,7 @@ public class OnlineReversiBoardController extends Reversi implements Initializab
 
     @FXML
     GridPane gridBoard;
+    public ReversiAi ai = new ReversiAi();
     public static int turn = 1;
     int[][] oldBoard = getBoard();
     private PlayerType player1;
@@ -27,17 +27,16 @@ public class OnlineReversiBoardController extends Reversi implements Initializab
     private int colorBlack;
     private int colorWhite;
     private HashMap<PlayerType, Integer> players = new HashMap<PlayerType, Integer>();
+    private int aiColor;
+    private boolean againstAi = true;
 
-    public OnlineReversiBoardController(PlayerType player1, PlayerType player2, int colorBlack, int colorWhite){
-        this.player1 = player1;
-        this.player2 = player2;
-        this.colorBlack = colorBlack;
-        this.colorWhite = colorWhite;
-    }
+
 
     public OnlineReversiBoardController(){
 
     }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -51,16 +50,21 @@ public class OnlineReversiBoardController extends Reversi implements Initializab
         setStone(4,3,2);
         setStone(3,3,1);
         drawBoard();
-    }
-    @FXML
-    protected void setScene(String path) {
-        Main.setScene(path);
-    }
 
-    @FXML
-    protected void handleConfigAction(ActionEvent event){
-        setScene("view/online.fxml");
     }
+    public void setAi(int ai){
+        System.out.println("Ai is player " + ai);
+        aiColor = ai;
+    }
+    //@FXML
+    //protected void setScene(String path) {
+    //    Main.setScene(path);
+    //}
+
+    //@FXML
+    //protected void handleConfigAction(ActionEvent event){
+    //    setScene("view/online.fxml");
+    //}
 
     public int[] convertToBoardPosition(int p){
         int[]position = new int[2];
@@ -120,7 +124,15 @@ public class OnlineReversiBoardController extends Reversi implements Initializab
                 break;
         }
     }
+    public void aiMove(){
+        boardChange(ai.calculateRandomMove(legalMoves(getBoard(), this.turn), getBoard(), this.turn));
+        if(getBoard() == oldBoard){
+            if(this.turn == 1) { this.turn++;}
+            else{this.turn--;}
+        }
+        setStoneOnBoard(100,100,this.turn);
 
+    }
     public void setStoneOnBoard(int x, int y, int turn) {
         if(x!=100){
             if(isEmpty(x, y)) {
@@ -142,6 +154,7 @@ public class OnlineReversiBoardController extends Reversi implements Initializab
                             stone_1.setRadius(30.0f);
                             gridBoard.add(stone_1, j, i);
                             this.turn = 2;
+                            drawBoard();
                         }
                     }
                 }
@@ -158,6 +171,7 @@ public class OnlineReversiBoardController extends Reversi implements Initializab
                             stone_2.setFill(Color.WHITE);
                             gridBoard.add(stone_2, j, i);
                             this.turn = 1;
+                            drawBoard();
                         }
                     }
                 }
@@ -171,19 +185,11 @@ public class OnlineReversiBoardController extends Reversi implements Initializab
 
         //if (againstAi == true && aiColor == this.turn) {
         //boardChange(ai.calculateRandomMove(legalMoves(getBoard(), this.turn), getBoard(), this.turn));
-        if(getBoard() == oldBoard){
-
-            if(this.turn == 1) { this.turn++;}
-            else{this.turn--;}
-        }
-
-
-
+        //if(getBoard() == oldBoard){
+        //   if(this.turn == 1) { this.turn++;}
+        //  else{this.turn--;}
+        // }
         //setStoneOnBoard(100,100,this.turn);
-       // }
-    }
-
-    public void handleConfigAction(javafx.event.ActionEvent event) {
-        setScene("view/online.fxml");
+        //}
     }
 }

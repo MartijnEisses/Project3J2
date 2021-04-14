@@ -6,25 +6,29 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import root.server.Connection;
+import root.controller.OnlineReversiBoardController;
 
 import javax.swing.*;
 import java.io.IOException;
 
 public class Main extends Application {
-
+public static FXMLLoader loader;
     public static Stage primaryStage;
     public static Connection newConnection;
+    public static OnlineReversiBoardController  controller;
+
+
 
     @FXML
     public static Parent root;
-
+    public static OnlineReversiBoardController online;
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        this.primaryStage = primaryStage;
-
+        Main.primaryStage = primaryStage;
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("view/main.fxml"));
         root = loader.load();
@@ -36,12 +40,13 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws IOException {
+
         newConnection = new Connection();
         launch(args);
     }
 
     public static void setScene(String path) {
-        FXMLLoader loader = new FXMLLoader();
+        loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource(path));
         try {
             root = loader.load();
@@ -51,6 +56,9 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public Stage getPrimaryStage() {
+        return this.primaryStage;
     }
 
     public static void goToMain(KeyCode code) {

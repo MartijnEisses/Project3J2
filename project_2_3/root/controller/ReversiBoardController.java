@@ -6,7 +6,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.paint.Color;
-import root.model.Game;
 import root.model.Reversi;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -115,8 +114,8 @@ public class ReversiBoardController extends Reversi implements Initializable {
                             stone_2.setFill(Color.WHITE);
                             System.out.println("Setting stone on : " + x + " - " + y + " for: white");
                             gridBoard.add(stone_2, j, i);
-                            setStone(x, y, turn);
                             this.turn = 1;
+                            drawBoard();
                         }
                     }
                 }
