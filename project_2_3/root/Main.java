@@ -8,8 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import root.model.Reversi;
 import root.server.Connection;
 import root.controller.OnlineReversiBoardController;
+import root.server.Interpreter;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -18,25 +20,28 @@ public class Main extends Application {
 public static FXMLLoader loader;
     public static Stage primaryStage;
     public static Connection newConnection;
-    public static OnlineReversiBoardController  controller;
 
 
 
     @FXML
     public static Parent root;
-    public static OnlineReversiBoardController online;
+    public static Reversi controller;
+    public static Interpreter interpreter;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        interpreter = new Interpreter();
 
         Main.primaryStage = primaryStage;
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("view/main.fxml"));
         root = loader.load();
-
         primaryStage.setTitle("project 2.3");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
+
     }
 
     public static void main(String[] args) throws IOException {

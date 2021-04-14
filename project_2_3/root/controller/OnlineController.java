@@ -15,18 +15,19 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+import root.model.Reversi;
 import root.server.Connection;
 import root.server.Interpreter;
 
 
-public class OnlineController extends Online implements Initializable {
+public class OnlineController implements Initializable {
 
-    private Online onlinemodel;
     private static Timer playerTimer;
     private List<String> playerList;
     public OnlineReversiBoardController ReversiGame;
     private ConfigSenderController configSenderController;
     private Interpreter interpreter;
+
 
     @FXML
     private TextField opponent;
@@ -62,12 +63,24 @@ public class OnlineController extends Online implements Initializable {
 
     @FXML
     protected void acceptChallengeButton(ActionEvent event) throws IOException {
-        System.out.println("accept is pressed!");
-        Connection.acceptGameChallenge(Interpreter.getGameID());
-       // if(Interpreter.getGameChallenge()!=null) {
-          //  handleChallengeButton(event);
-       //
-        setScene("view/OnlineReversi.fxml");
+        Window ErrorMessage = challengeButton.getScene().getWindow();
+        //System.out.println("accept is pressed!");
+
+            if(Interpreter.getGameChallenge() == null){
+                AlertHelp.showAlert(Alert.AlertType.ERROR, ErrorMessage, "Wait! Error!", "No challenge has been Send!");
+                return;
+            }
+               Main.newConnection.acceptGameChallenge(Interpreter.getGameID());
+              // Connection.acceptGameChallenge(Interpreter.getGameID());
+                // if(Interpreter.getGameChallenge()!=null) {
+                //  handleChallengeButton(event);
+                //
+                setScene("view/OnlineReversi.fxml");
+                Main.controller = new Reversi();
+                //Main.setReversi();
+                //Main.setReversi("view/OnlineReversi.fxml");
+
+
     }
 
     @FXML
@@ -82,6 +95,16 @@ public class OnlineController extends Online implements Initializable {
 
     }
 
+
+    public void youLost(){
+        Window ErrorMessage = challengeButton.getScene().getWindow();
+        AlertHelp.showAlert(Alert.AlertType.ERROR, ErrorMessage, "Wait! Error!", "Whoops, looks Like you lost!");
+        setScene("view/online.fxml");
+
+
+        return;
+
+    }
 
     @FXML
     protected void handleChallengeButton(ActionEvent event) throws IOException {
@@ -100,8 +123,8 @@ public class OnlineController extends Online implements Initializable {
         Connection.challengePlayer(opponent.getText() , " Reversi");
 
         System.out.println("Gamestart whosTUrn ai");
-        //ReversiGame = new OnlineReversiBoardController();
-        //setScene("view/OnlineReversi.fxml");
+        ReversiGame = new OnlineReversiBoardController();
+        setScene("view/OnlineReversi.fxml");
 
 
     }

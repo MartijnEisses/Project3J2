@@ -63,11 +63,10 @@ public class ConfigSenderController implements Initializable {
             return;
         }
         // AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, ErrorMessage, "Correct registration!", "Goodluck and may you WIN! " + ignField.getText());
-        System.out.println("Connected to: " + ipField.getText() + " on port : " + portField.getText());
+        //System.out.println("Connected to: " + ipField.getText() + " on port : " + portField.getText());
 
 
-
-            System.out.println("test");
+            //System.out.println("test");
             Main.newConnection.connectToServer(ipField.getText(),Integer.parseInt(portField.getText()));
             Main.newConnection.login(ignField.getText());
             setScene("view/online.fxml");
