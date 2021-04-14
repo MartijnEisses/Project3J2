@@ -12,13 +12,24 @@
 
 
 <?import java.net.URL?>
-<GridPane fx:id="gridBoard" fx:controller="root.controller.OnlineReversiBoardController" xmlns:fx="http://javafx.com/fxml" styleClass="boardBackground" alignment="center" gridLinesVisible="true">
 
 
-
-
+<VBox id="vbox" prefHeight="400" prefWidth="800" xmlns:fx="http://javafx.com/fxml" fx:controller="root.controller.OnlineReversiBoardController" styleClass="boardBackground">
+    <MenuBar fx:id="menuBar" xmlns:fx="http://javafx.com/fxml">
+        <menus>
+            <Menu text="Actions">
+                <items>
+<!--                    <MenuItem onAction="#handleAboutAction" text="Restart Game"/>-->
+                    <MenuItem onAction="#onlineLobby" text="Go to previous window"/>
+<!--                    <MenuItem text="Go to main panel"/>-->
+                    <SeparatorMenuItem />
+                    <MenuItem onAction="#goMain" text="Exit"/>
+                </items>
+            </Menu>
+        </menus>
+    </MenuBar>
+    <GridPane fx:id="gridBoard"  xmlns:fx="http://javafx.com/fxml"  alignment="center" gridLinesVisible="true" style="-fx-padding: 40px;"></GridPane>
     <stylesheets>
         <URL value="@Style.css" />
     </stylesheets>
-
-</GridPane>
+</VBox>
