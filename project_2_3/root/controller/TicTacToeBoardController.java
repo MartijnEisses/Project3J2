@@ -41,7 +41,6 @@ public class TicTacToeBoardController extends TicTacToe implements Initializable
     }
 
     public void setStoneOnBoard(int x, int y, int turn) {
-        System.out.println(turn);
         if (isEmpty(x, y)) {
             setStone(x, y, turn);
             switch (turn % 2) {

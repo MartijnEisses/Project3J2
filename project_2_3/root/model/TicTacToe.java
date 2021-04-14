@@ -8,8 +8,8 @@ public class TicTacToe extends Board {
 
     Scanner in = new Scanner(System.in);
 
-    // AI is BLACK player is WHITE
     private enum Color {
+        // AI is BLACK player is WHITE
         EMPTY, BLACK, WHITE
     }
 
@@ -20,31 +20,31 @@ public class TicTacToe extends Board {
     public int[][] oBoardPosition = { { 0, 0 }, { 0, 1 }, { 0, 2 }, { 1, 0 }, { 1, 1 }, { 1, 2 }, { 2, 0 }, { 2, 1 },
             { 2, 2 } };
 
-    public Map<Color, Integer> scores = new HashMap<Color, Integer>();
+    public Map<Integer, Integer> scores = new HashMap<Integer, Integer>();
 
     Board b;
     boolean endGame = false;
     int turn = 1;
+    private static final int MAX_DEPTH = 6;
 
     public TicTacToe() {
         super(3, 3);
         b = new Board(3, 3);
-        scores.put(Color.BLACK, 10);
-        scores.put(Color.WHITE, -10);
-        scores.put(Color.EMPTY, 0);
+        scores.put(Color.BLACK.ordinal(), 10);
+        scores.put(Color.WHITE.ordinal(), -10);
+        scores.put(Color.EMPTY.ordinal(), 0);
     }
 
     public int BestMove() {
         int bestScore = Integer.MIN_VALUE;
         int bestMove = 0;
-
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
                 // is there an empty spot
                 if (board[i][j] == Color.EMPTY.ordinal()) {
                     board[i][j] = Color.BLACK.ordinal();
                     turn++;
-                    int score = Minimax(board, 0, false);
+                    int score = Minimax(board, MAX_DEPTH, false);
                     turn--;
                     board[i][j] = Color.EMPTY.ordinal();
                     if (score > bestScore) {
@@ -54,14 +54,13 @@ public class TicTacToe extends Board {
                 }
             }
         }
-        System.out.println("Best Move: " + bestMove);
         return bestMove;
     }
 
     private int Minimax(int[][] board, int depth, boolean isMaximizing) {
-        Color winner = CheckForWin();
-        if (winner != null) {
-            return scores.get(winner);
+        int boardVal = evaluateBoard(board, depth);
+        if (Math.abs(boardVal) > 0 || depth == 0 || turn == 9) {
+            return boardVal;
         }
 
         if (isMaximizing) {
@@ -72,36 +71,27 @@ public class TicTacToe extends Board {
                     if (board[i][j] == Color.EMPTY.ordinal()) {
                         board[i][j] = Color.BLACK.ordinal();
                         turn++;
-                        int score = Minimax(board, depth + 1, false);
-                        turn--;
+                        bestScore = Math.max(bestScore, Minimax(board, depth - 1, false));
                         board[i][j] = Color.EMPTY.ordinal();
-                        if (score > bestScore) {
-                            bestScore = score;
-                        }
+                        turn--;
                     }
                 }
             }
-
             return bestScore;
         } else {
-            {
-                int lowestScore = Integer.MAX_VALUE;
-                for (int i = 0; i < board.length; i++) {
-                    for (int j = 0; j < board.length; j++) { // is there an empty spot
-                        if (board[i][j] == Color.EMPTY.ordinal()) {
-                            board[i][j] = Color.WHITE.ordinal();
-                            turn++;
-                            int score = Minimax(board, depth + 1, true);
-                            turn--;
-                            board[i][j] = Color.EMPTY.ordinal();
-                            if (score < lowestScore) {
-                                lowestScore = score;
-                            }
-                        }
+            int lowestScore = Integer.MAX_VALUE;
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board.length; j++) { // is there an empty spot
+                    if (board[i][j] == Color.EMPTY.ordinal()) {
+                        board[i][j] = Color.WHITE.ordinal();
+                        turn++;
+                        lowestScore = Math.min(lowestScore, Minimax(board, depth - 1, true));
+                        turn--;
+                        board[i][j] = Color.EMPTY.ordinal();
                     }
                 }
-                return lowestScore;
             }
+            return lowestScore;
         }
 
     }
@@ -183,10 +173,10 @@ public class TicTacToe extends Board {
         default:
             break;
         }
-
-        for (int i = 0; i < board.length; i++) {
-            System.out.println(board[0][i] + "" + board[1][i] + "" + board[2][i]);
-        }
+        /*
+         * for (int i = 0; i < board.length; i++) { System.out.println(board[0][i] + ""
+         * + board[1][i] + "" + board[2][i]); }
+         */
     }
 
     public Boolean ValidMove(int x, int y) {
@@ -259,6 +249,66 @@ public class TicTacToe extends Board {
             return Color.EMPTY;
         }
         return null; // no win/loss/tie
+    }
+
+    private int evaluateBoard(int[][] board, int depth) {
+        int rowSum = 0;
+        int bWidth = board.length;
+        int blackWin = scores.get(Color.BLACK.ordinal()) * bWidth;
+        int whiteWin = scores.get(Color.WHITE.ordinal()) * bWidth;
+
+        // Check rows for winner.
+        for (int row = 0; row < bWidth; row++) {
+            for (int col = 0; col < bWidth; col++) {
+                rowSum += scores.get(board[row][col]);
+            }
+            if (rowSum == blackWin) {
+                return 10 + depth;
+            } else if (rowSum == whiteWin) {
+                return -10 - depth;
+            }
+            rowSum = 0;
+        }
+
+        // Check columns for winner.
+        rowSum = 0;
+        for (int col = 0; col < bWidth; col++) {
+            for (int row = 0; row < bWidth; row++) {
+                rowSum += scores.get(board[row][col]);
+            }
+            if (rowSum == blackWin) {
+                return 10 + depth;
+            } else if (rowSum == whiteWin) {
+                return -10 - depth;
+            }
+            rowSum = 0;
+        }
+
+        // Check diagonals for winner.
+        // Top-left to bottom-right diagonal.
+        rowSum = 0;
+        for (int i = 0; i < bWidth; i++) {
+            rowSum += scores.get(board[i][i]);
+        }
+        if (rowSum == blackWin) {
+            return 10 + depth;
+        } else if (rowSum == whiteWin) {
+            return -10 - depth;
+        }
+
+        // Top-right to bottom-left diagonal.
+        rowSum = 0;
+        int indexMax = bWidth - 1;
+        for (int i = 0; i <= indexMax; i++) {
+            rowSum += scores.get(board[i][indexMax - i]);
+        }
+        if (rowSum == blackWin) {
+            return 10 + depth;
+        } else if (rowSum == whiteWin) {
+            return -10 - depth;
+        }
+
+        return 0;
     }
 
     public void Win(Color winner) {
