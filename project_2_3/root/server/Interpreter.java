@@ -1,6 +1,8 @@
 package root.server;
 
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import root.Main;
 import root.controller.OnlineController;
 import root.controller.OnlineReversiBoardController;
@@ -182,6 +184,7 @@ public class Interpreter {
                                 break;
                             case "WIN":
                                 //info over win
+
                                 //online.setScene("view/online.fxml");
                                 //alle stenen moeten worden gereset.
                                 //Display that user has won.Terug naar online screen en display user has won.
@@ -190,6 +193,7 @@ public class Interpreter {
                                 //info over loss.
                                // online.setScene("view/online.fxml");
                                 //alle stenen moeten worden gereset.
+
                                 //Display that user has lost. Terug naar online screen en display user has lost
                                 break;
                             default:
@@ -237,4 +241,15 @@ public class Interpreter {
     }
 
 
+}
+class AlertHelpers {
+
+    public static void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.initOwner(owner);
+        alert.show();
+    }
 }

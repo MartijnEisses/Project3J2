@@ -19,7 +19,6 @@ import root.model.Reversi;
 import root.server.Connection;
 import root.server.Interpreter;
 
-
 public class OnlineController implements Initializable {
 
     private static Timer playerTimer;

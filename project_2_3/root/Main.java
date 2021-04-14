@@ -45,7 +45,6 @@ public static FXMLLoader loader;
     }
 
     public static void main(String[] args) throws IOException {
-
         newConnection = new Connection();
         launch(args);
     }
