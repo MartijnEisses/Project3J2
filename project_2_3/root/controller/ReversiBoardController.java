@@ -8,7 +8,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.paint.Color;
 import root.model.ReversiAi;
 import root.model.Reversi;
+
+import javafx.event.ActionEvent;
 import java.net.URL;
+import root.Main;
 import java.util.ResourceBundle;
 
 public class ReversiBoardController extends Reversi implements Initializable {
@@ -117,4 +120,10 @@ public class ReversiBoardController extends Reversi implements Initializable {
         updateBoard();
 
     }
+    @FXML
+    public void onlineLobby(ActionEvent actionEvent) { Main.setScene("view/online.fxml"); }
+    @FXML
+    public void goMain(ActionEvent actionEvent) { Main.setScene("view/main.fxml"); }
+
+
 }

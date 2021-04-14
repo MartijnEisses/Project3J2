@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import root.model.Reversi;
 import root.server.Connection;
-import root.controller.OnlineReversiBoardController;
+import root.controller.ReversiBoardController;
 import root.server.Interpreter;
 
 import javax.swing.*;

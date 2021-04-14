@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import root.Main;
 import root.controller.OnlineController;
-import root.controller.OnlineReversiBoardController;
+import root.controller.ReversiBoardController;
 import root.model.Board;
 import root.model.Online;
 import root.model.ReversiAi;

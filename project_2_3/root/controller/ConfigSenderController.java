@@ -32,7 +32,7 @@ public class ConfigSenderController implements Initializable {
     private Button submitButton;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ignField.setText("HerkansingsGroep7Wanneer?");
+        ignField.setText("IllegalMove7");
         ipField.setText("127.0.0.1");
         portField.setText("7789");
     }

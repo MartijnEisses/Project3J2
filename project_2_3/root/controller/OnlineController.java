@@ -23,7 +23,7 @@ public class OnlineController implements Initializable {
 
     private static Timer playerTimer;
     private List<String> playerList;
-    public OnlineReversiBoardController ReversiGame;
+    public ReversiBoardController ReversiGame;
     private ConfigSenderController configSenderController;
     private Interpreter interpreter;
 
@@ -122,7 +122,7 @@ public class OnlineController implements Initializable {
         Connection.challengePlayer(opponent.getText() , " Reversi");
 
         System.out.println("Gamestart whosTUrn ai");
-        ReversiGame = new OnlineReversiBoardController();
+        ReversiGame = new ReversiBoardController();
         setScene("view/OnlineReversi.fxml");
 
 
