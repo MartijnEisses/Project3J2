@@ -24,6 +24,7 @@
 <!--                    <MenuItem text="Go to main panel"/>-->
                     <SeparatorMenuItem />
                     <MenuItem onAction="#goMain" text="Exit"/>
+
                 </items>
             </Menu>
         </menus>

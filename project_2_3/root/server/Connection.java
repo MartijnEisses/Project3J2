@@ -2,6 +2,7 @@ package root.server;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import root.Main;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -67,7 +68,7 @@ public class Connection {
 
     }
 
-    public static void acceptGameChallenge(int gameID) {
+    public  void acceptGameChallenge(int gameID) {
         System.out.println("Start acceptGameChallenge, sending challenge accept!");
         commandQueue.add("challenge accept " + gameID);
         printQueue();
@@ -143,7 +144,7 @@ public class Connection {
 
     static class ReadLines implements Runnable {
         BufferedReader reader;
-        Interpreter interpreter = new Interpreter();
+        Interpreter interpreter = Main.interpreter;
         private List<String> firstServerResponse = Arrays.asList("Strategic Game Server Fixed [Version 1.1.0]",
                 "(C) Copyright 2015 Hanzehogeschool Groningen");
 
@@ -157,8 +158,8 @@ public class Connection {
                     if(line.equals(firstServerResponse)){
                         continue;
                     }
-                    System.out.println("Server Response: " +line);
-                    interpreter.inputInterpreter(line);
+                    //System.out.println("Server Response: " +line);
+                    Main.interpreter.inputInterpreter(line);
 
                 }
             } catch (ArrayIndexOutOfBoundsException  | IOException e) {
