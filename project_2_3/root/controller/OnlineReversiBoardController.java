@@ -1,15 +1,17 @@
 package root.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import root.Main;
 import root.model.Reversi;
 import root.model.ReversiAi;
 
-import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.HashMap;
@@ -192,4 +194,9 @@ public class OnlineReversiBoardController extends Reversi implements Initializab
         //setStoneOnBoard(100,100,this.turn);
         //}
     }
+
+
+    public void onlineLobby(ActionEvent actionEvent) { Main.setScene("view/online.fxml"); }
+
+    public void goMain(ActionEvent actionEvent) { Main.setScene("view/main.fxml"); }
 }
