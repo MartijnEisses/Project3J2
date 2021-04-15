@@ -120,6 +120,15 @@ public class ReversiBoardController extends Reversi implements Initializable {
         updateBoard();
 
     }
+
+    //Two dimensional array to int.
+    public int LocationToInt(int x,int y){
+        x++;
+        x*=8;
+        x--;
+        return x+y;
+    }
+
     @FXML
     public void onlineLobby(ActionEvent actionEvent) { Main.setScene("view/online.fxml"); }
     @FXML

@@ -10,9 +10,8 @@ import root.model.Board;
 import root.model.Online;
 import root.model.ReversiAi;
 import root.model.Reversi;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
+import java.util.*;
 
 
 public class Interpreter {
@@ -63,7 +62,7 @@ public class Interpreter {
                         for (int i = 2; i < commands.length; i++) {
                             String temp = commands[i];
                             playerList.add(temp);
-                            System.out.println(commands[i]);
+                            //System.out.println(commands[i]);
                         }
                         break;
                     case "HELP":
@@ -152,7 +151,7 @@ public class Interpreter {
                                 System.out.println("Its youre turn ai make a good move...");
                                 System.out.println();
                                 //online.aiMove();
-                                System.out.println( "ai player is: " + getPlayerAI() + " opponenent: " + getPlayerOpponent() );
+                               System.out.println( "ai player is: " + getPlayerAI() + " opponenent: " + getPlayerOpponent() );
                                 if(getPlayerAI() ==1 ) {
                                     Connection.setMove(37);
                                     //online.aiMove(1);
